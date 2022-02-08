@@ -1,0 +1,81 @@
+.login-page {
+    height: 100vh;
+    width: 100vw;
+
+    background: #cb2d3e;
+    background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);
+    background: linear-gradient(to right, #ef473a, #cb2d3e);
+
+    display: grid;
+    place-items: center;
+}
+
+.login-card {
+    background-color: $color-white;
+    width: clamp(50rem, 60rem, 90%);
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    justify-content: space-between;
+    border-radius: 0.5rem;
+    box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.08), -0.5rem -0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+    min-height: 60rem;
+    max-width: 90%;
+
+    &__logo {
+        height: 30%;
+       
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+
+        & img {
+            max-width: 70%;
+            object-fit: cover;
+        }
+    }
+
+    &__form {
+       
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        & .inputs {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            margin-bottom: 10rem;
+
+            & input {
+                width: 100%;
+                display: block;
+
+                border: none;
+             
+                outline: none;
+                border-radius: 0.5rem;
+                padding: 2rem 1.5rem;
+
+                
+                &:first-of-type {
+                    margin-bottom: 1rem;
+                }
+               
+            }
+            & a {
+                margin-top: 2rem;
+            }
+
+        }
+
+        & button {
+            width: 50%;
+        }
+    }
+}

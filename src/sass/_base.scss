@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.swal2-popup {
+    font-size: 1.4rem !important;
+}
+
+.swal2-container {
+    zoom: 1.5;
+}
+
+html {
+    font-size: 62.5%; // 1rem == 10px
+
+    @include respond(tab-port) {
+        font-size: 50%; // 1rem == 8px
+    }
+
+    @include respond(tab-land) {
+        font-size: 56.25%; // 1rem == 9px
+    }
+
+    @include respond(big-desk) {
+        font-size: 75%; // 1rem == 12px, 12/16
+    }
+}
+
+body {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font-family: "Poppins", sans-serif;
+}
+
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p,
+a,
+span,
+input,
+textarea,
+label {
+    font-size: 1.4rem;
+    color: $color-text;
+}
+
+input {
+    padding: 0.5rem 1rem;
+}
+
+.btn,
+button .btn,
+a .btn {
+    padding: 1.8rem 3.5rem;
+    color: white;
+    background-color: $color-secondary;
+    @include transition;
+    cursor: pointer;
+    border: none;
+    border-radius: 3rem;
+
+    &:hover {
+        background-color: darken($color-secondary, 10);
+    }
+}
+
+.scroll {
+    overflow-y: scroll;
+    position: relative;
+
+    /* width */
+    &::-webkit-scrollbar {
+        width: 1rem;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        // box-shadow: inset 0 0 5px grey;
+        border-radius: 50%;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $color-primary;
+        border-radius: 1rem;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: darken($color-primary, $amount: 10);
+    }
+}
