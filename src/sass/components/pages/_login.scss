@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-   
+
     justify-content: space-between;
     border-radius: 0.5rem;
     box-shadow: 0.5rem 0.5rem 1.5rem rgba(0, 0, 0, 0.08), -0.5rem -0.5rem 1.5rem rgba(0, 0, 0, 0.08);
@@ -26,19 +26,23 @@
 
     &__logo {
         height: 30%;
-       
+
         overflow: hidden;
         display: flex;
         justify-content: center;
-
+        margin-bottom: 1rem;
         & img {
-            max-width: 70%;
+            max-width: 60%;
             object-fit: cover;
         }
     }
+    &__text {
+        width: 60%;
+        text-align: center;
+        font-size: small;
+    }
 
     &__form {
-       
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -53,29 +57,34 @@
             margin-bottom: 10rem;
 
             & input {
+                background-color: darken($color: $color-white, $amount: 8);
                 width: 100%;
                 display: block;
 
                 border: none;
-             
+
                 outline: none;
                 border-radius: 0.5rem;
-                padding: 2rem 1.5rem;
-
-                
-                &:first-of-type {
-                    margin-bottom: 1rem;
-                }
-               
+                padding: 1.5rem 1.5rem;
+                margin-bottom: 1rem;
             }
-            & a {
-                margin-top: 2rem;
-            }
-
         }
-
+        & a {
+            width: 35%; 
+            @include respond(tab-port) {
+                width: 50%;
+            }
+        }
+       
+        & span {
+            color: red;
+            font-weight: 600;
+        }
         & button {
             width: 50%;
+            @include respond(tab-port) {
+                width: 100%;
+            }
         }
     }
 }

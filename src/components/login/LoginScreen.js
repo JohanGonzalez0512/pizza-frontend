@@ -1,9 +1,32 @@
 
 import logo from '../../resources/logo.png'
 import { Link } from 'react-router-dom';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export const LoginScreen = () => {
+
+
+
+
+    const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: (values) => {
+            resetForm()
+        },
+        validationSchema: Yup.object({
+
+            password: Yup.string()
+                .max(15, 'Debe de tener 15 caracteres o menos')
+                .required('Requerido'),
+            email: Yup.string()
+                .email('El correo no tiene un formato válido')
+                .required('Requerido'),
+        })
+    });
 
 
 
@@ -14,23 +37,22 @@ export const LoginScreen = () => {
                 <div className="login-card__logo">
                     <img src={logo} alt="" className="logo" />
                 </div>
-                <form className="login-card__form" >
+                <form onSubmit={handleSubmit} className="login-card__form" >
                     <div className="inputs">
-                        <input
-                            placeholder="Correo electrónico"
-                            type="text"
-                            name="email"
+                        
+                        <label htmlFor="email">Correo eletronico</label>
+                        <input type="text" {...getFieldProps('email')} />
+                        {touched.email && errors.email && <span>{errors.email}</span>}
 
-                        />
-                        <input
-                            placeholder="Contraseña"
-                            type="password"
-                            name="password"
-                            id="pwd"
 
-                        />
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="text" {...getFieldProps('password')} />
+                        {touched.password && errors.password && <span>{errors.password}</span>}
+
+
                         <Link className='link' to='login-forget-password'
                         >¿Restablecer contraseña?</Link >
+
                     </div>
                     <button type="submit" className="btn">
                         Iniciar sesión

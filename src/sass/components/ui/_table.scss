@@ -1,0 +1,213 @@
+.table {
+    height: 50%;
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+
+    &__headers {
+        display: flex;
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 2rem;
+        &__cell {
+            padding: 0.4rem;
+            color: $color-black;
+            font-size: 1.5rem;
+            padding-bottom: 0;
+            font-weight: 500;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        height: 95%;
+        overflow: auto;
+        flex: 1 1 0;
+        flex-basis: 0px;
+        position: relative;
+        &__row {
+            display: flex;
+            width: 100%;
+            height: 5rem;
+            margin: 0.3rem 0 0.3rem 0;
+            box-shadow: 0px 3px 6px #00000029;
+            border-radius: 10px;
+            position: relative;
+
+            &__cell {
+                display: flex;
+                padding: 0.5rem;
+                font-size: calc(0.4rem + 0.5vw);
+                align-items: center;
+
+                input {
+                    background-color: red;
+                }
+            }
+
+            div:nth-child(odd) {
+                background-color: $color-white;
+            }
+            div:nth-child(even) {
+                background-color: $color-white;
+            }
+            div:first-child {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+            div:last-child {
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+
+            &__cell.searched {
+                background-color: $color-white !important;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .empty {
+        &__headers {
+            opacity: 0.5;
+        }
+        &__body {
+            opacity: 0.6;
+
+            .table__body__row {
+                div:nth-child(even) {
+                    background-color: #f4fafe;
+                }
+            }
+        }
+    }
+}
+
+.skeleton {
+    &__row {
+        cursor: progress;
+        background: linear-gradient(0.25turn, transparent, #699999, transparent) 0% 0% / 100% 100% no-repeat;
+        background-position: -400px 0;
+        background-size: 400px auto;
+        animation: loading 2s infinite;
+    }
+    &__cell {
+        opacity: 0.8;
+    }
+}
+
+@keyframes loading {
+    to {
+        background-position: calc(100% + 400px) 0;
+    }
+}
+
+@include respond(phone) {
+
+    .scroll {
+        &::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background: $color-secondary;
+            border-radius: 2px;
+        }
+    
+        &::-webkit-scrollbar-thumb:active {
+            background: darken($color-secondary, $amount: 10);
+        }
+    
+        &::-webkit-scrollbar-thumb:hover {
+            background: darken($color-secondary, $amount: 10);
+        }
+    
+        /* Estilos track de scroll */
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    }
+     .table {
+        flex-direction: row;
+        border-radius: 1rem;
+        height: 60%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+
+        &__headers {
+            background-color: $color-primary;
+            height: 100%;
+            width: 10rem;
+            flex-direction: column;
+            justify-content:space-around;
+            border-radius: 10px 0 0 10px;
+
+            &__cell {
+                // background-color: ;
+                color: $color-white;
+                width: auto !important;
+                display: flex;
+                justify-content:center;
+                align-items: center;
+                font-size: 1.5rem;
+                font-weight: 400;
+           
+            }
+        }
+
+        &__body {
+            flex-basis: content;
+            flex-direction: row;
+            background-color: $color-white;
+            height: 100%;
+    
+            &__row {
+                margin: 0;
+                box-shadow: none;
+                flex-direction: column;
+                height: 100%;
+                width: auto;
+                border-radius: 0;
+                justify-content:space-between;
+                
+                width: 100%;
+    
+                &__cell {
+                    margin-top: 1.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #699999;
+                    width: auto !important;
+                    // background-color: $white ;
+                    font-size:1.5rem;
+                    background-color: transparent !important;
+    
+                   
+                    // &.searched {
+                    //     background-color: $color-value-searched !important;
+                    // }
+                }
+    
+                &:nth-child(even) {
+                    background-color: $color-white;
+                }
+                &:nth-child(odd) {
+                    background-color: $color-white;
+                    
+                }
+            }
+    
+            & .noselect {
+                width: 100% !important;
+            }
+        }
+    }
+
+     
+}

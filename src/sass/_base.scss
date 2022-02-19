@@ -102,12 +102,12 @@ a .btn {
 
     /* Handle */
     &::-webkit-scrollbar-thumb {
-        background: $color-primary;
+        background: $color-secondary;
         border-radius: 1rem;
     }
 
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-        background: darken($color-primary, $amount: 10);
+        background: darken($color-secondary, $amount: 10);
     }
 }

@@ -10,8 +10,8 @@ export const Navbar = () => {
         subMenu1: false,
         subMenu2: false
     });
-    const { subMenu1, subMenu2 } =subMenusActive;
-   
+    const { subMenu1, subMenu2 } = subMenusActive;
+
     return (
         <>
             <div
@@ -42,9 +42,9 @@ export const Navbar = () => {
 
                             <p className="main-link">Pedidos</p>
                             <div className={`submenu  ${subMenusActive.subMenu1 ? 'active' : ''}`}>
-                                <Link to="/" > submenu1</Link>
-                                <Link to="/" > submenu2</Link>
-                                <Link to="/"> submenu3</Link>
+                                <Link to="/pedidos" >Hacer Pedido</Link>
+                                <Link to="/pedidos/historial" >Historial</Link>
+                                <Link to="/"> Administrar menu</Link>
 
                             </div>
                         </div>
@@ -55,13 +55,13 @@ export const Navbar = () => {
                         })}>
                             <p className="main-link">Inventario</p>
                             <div className={`submenu  ${subMenusActive.subMenu2 ? 'active' : ''}`}>
-                                <Link to="/" >submenu1</Link>
-                                <Link to="/" >submenu2</Link>
+                                <Link to="/inventario" >Productos</Link>
+                                <Link to="/inventario/categorias" >Categorias</Link>
 
                             </div>
                         </div>
                         <div className="link">
-                            <Link to="/" className="main-link" >Contabilidad</Link>
+                            <Link to="/contabilidad" className="main-link" >Contabilidad</Link>
 
                         </div>
                     </div>

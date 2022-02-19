@@ -1,30 +1,33 @@
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from '../components/Home';
+import { CategoriesScreen } from '../components/inventory/CategoriesScreen';
+import { ProductsScreen } from '../components/inventory/ProductsScreen';
+import { MakeOrder } from '../components/orders/MakeOrder';
+import { OrdersHistory } from '../components/orders/OrdersHistory';
+import { PaymentsScreen } from '../components/payments/PaymentsScreen';
+import { Navbar } from '../components/ui/Navbar';
 
-// import { Navbar } from '../components/ui/Navbar';
-
-// import { DcScreen } from '../components/dc/DcScreen';
-// import { MarvelScreen } from '../components/marvel/MarvelScreen';
-// import { SearchScreen } from '../components/search/SearchScreen';
-// import { HeroScreen } from '../components/hero/HeroScreen';
 
 
-// export const DashboardRoutes = () => {
-//     return (
-//         <>
-//             <Navbar />
 
-//             <div >
-//                 <Routes>
-//                     <Route path="marvel" element={<MarvelScreen />} />
-//                     <Route path="dc" element={<DcScreen />} />
+export const DashboardRoutes = () => {
+    return (
+        <>
+         
 
-//                     <Route path="search" element={<SearchScreen />} />
-//                     <Route path="hero/:heroeId" element={<HeroScreen />} />
+           
+              <Navbar/>
+                <Routes>
+                    
+                    <Route path="inventario" element={<ProductsScreen/>} />
+                    <Route path="pedidos" element={<MakeOrder/>} />
+                    <Route path="pedidos/historial" element={<OrdersHistory/>} />
+                    <Route path="contabilidad" element={<PaymentsScreen/>} />
+                    <Route path="inventario/categorias" element={<CategoriesScreen/>} />
+                    <Route path="/" element={<Home />} />
 
-//                     <Route path="/" element={<MarvelScreen />} />
-
-//                 </Routes>
-//             </div>
-//         </>
-//     )
-// }
+                </Routes>
+            
+        </>
+    )
+}

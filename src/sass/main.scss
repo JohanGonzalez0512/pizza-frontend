@@ -1,7 +1,17 @@
 @import "./abstracts/variables";
 @import "./abstracts/mixins";
-@import "./base";
-@import "./components/login";
-@import "./components/container";
-@import "./components/navbar";
 
+@import "./base";
+
+@import "./components/pages/login";
+
+@import "./components/ui/navbar";
+@import "./components/ui/selectlist";
+@import "./components/container";
+@import "./components/card";
+@import "./components/ui/table";
+
+@import "./components/ui/filters/searchbar";
+@import "./components/ui/filters/filters";
+@import "./components/ui/filters/select";
+@import "./components/ui/itemList";
