@@ -13,8 +13,10 @@ export const types = {
     authStartTokenRenew: '[auth] Start token renew',
     authCheckingStart: '[auth] authChecking start',
 
-  
 
+    orderSetActiveItem: '[order] Set active item',
+    orderSetIsActive: '[order] Set is active',
+    orderAddToCart: '[order] Add to cart',
 
 
 

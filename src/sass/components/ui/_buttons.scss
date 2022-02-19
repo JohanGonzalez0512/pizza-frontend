@@ -1,0 +1,22 @@
+.btn-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2.5rem;
+    border: solid 1px #cfcfcf;
+    background-color: $color-white;
+    color: $color-secondary;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    height: 4rem;
+    width: 15rem;
+
+    &:hover {
+        transition: all 0.3s ease-in-out;
+        background-color: $color-secondary;
+        color: $color-white;
+    }
+}

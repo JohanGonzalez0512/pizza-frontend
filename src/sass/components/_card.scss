@@ -7,7 +7,7 @@
     padding: 4rem;
     display: flex;
     flex-direction: column;
-
+    position: relative;
     @include respond(phone) {
         padding: 2rem 1rem;
     }

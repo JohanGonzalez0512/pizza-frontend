@@ -4,6 +4,7 @@
 @import "./base";
 
 @import "./components/pages/login";
+@import "./components/pages/makeOrders";
 
 @import "./components/ui/navbar";
 @import "./components/ui/selectlist";
@@ -14,4 +15,6 @@
 @import "./components/ui/filters/searchbar";
 @import "./components/ui/filters/filters";
 @import "./components/ui/filters/select";
-@import "./components/ui/itemList";
+@import "./components/ui/buttons";
+@import "./components/ui/list";
+@import "./components/ui/cart";
