@@ -3,12 +3,17 @@ import { useSelector } from 'react-redux';
 import { Cart } from '../ui/Cart';
 import { ListIngredients } from '../ui/makeOrders/ListIngredients';
 import { ListMenu } from '../ui/makeOrders/ListMenu';
+import { Modal } from '../ui/Modal';
+import { PayScreen } from './PayScreen';
 
 export const MakeOrder = () => {
 
-    const { orderActive, isActiveItem, options, itemListData, cart } = useSelector(state => state.orders);
+    const { orders, ui } = useSelector(state => state);
 
+    const { orderActive, isActiveItem, options, itemListData, cart } = orders;
 
+    const { isModalOpen } = ui;
+    
     return (
         <div className='container makeOrders'>
             <div className='card'>
@@ -32,7 +37,14 @@ export const MakeOrder = () => {
                         />
                         <Cart cart={cart} />
                     </>
+                }
 
+                {
+                    isModalOpen &&
+                    <Modal
+                        Component={PayScreen}
+                        data={cart}
+                    />
                 }
 
 

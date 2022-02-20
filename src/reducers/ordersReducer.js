@@ -114,18 +114,16 @@ export const ordersReducer = (state = initialState, action) => {
             };
 
         case types.orderAddToCart:
-            // Todo este despapaye es porque quería poder juntar las pizzas que coincidieran en ID y en ingredientes,
-            // Porque si quiero mostrar en el carrito, no creo que este bien solo mostrar el tema de la pizza que selecciono y 
-            // en otro item otra pizza exactamente igual, segun yo, ahí se muestran dos pizzas distintas. 
-            
-            const cartItem = state.cart.filter(cartItem => (cartItem.id === action.payload.id) && cartItem.idIng === action.payload.idIng);
-            console.log(cartItem);
-            if (cartItem.length > 0) {
+            console.log(action.payload);
+            const cartCoincidence = state.cart.find(item => JSON.stringify(item) === JSON.stringify({ ...action.payload, quantity: item.quantity }));
+            if (cartCoincidence !== undefined) {
                 return {
                     ...state,
                     cart: state.cart.map(cartItem =>
                         cartItem.id === action.payload.id
-                            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                            ? cartItem.idIng === action.payload.idIng
+                                ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                                : cartItem
                             : cartItem
                     ),
                 }

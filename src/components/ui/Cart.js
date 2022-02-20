@@ -1,10 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { uiSetIsModalOpen } from '../../actions/ui';
 
 export const Cart = ({ cart }) => {
 
+    const dispatch = useDispatch();
     const totalCost = cart.reduce((acc, item) => {
         return acc + parseInt(item.price)
     }, 0)
+    const handleClickPayItems = () => {
+        dispatch(uiSetIsModalOpen());
+    }
 
     const totalItems = cart.length;
 
@@ -22,7 +28,10 @@ export const Cart = ({ cart }) => {
 
                 <p className='cart__cost__text'>MX ${totalCost}</p>
             </div>
-            <button className="btn-add">
+            <button
+                className="btn-add"
+                onClick={handleClickPayItems}
+            >
                 Pagar
             </button>
         </div>
