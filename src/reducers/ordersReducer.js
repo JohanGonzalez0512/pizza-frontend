@@ -131,13 +131,13 @@ export const ordersReducer = (state = initialState, action) => {
                 }
             }
 
-                if (state.cart.find(cartItem => cartItem.id == action.payload.id && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
-                    const resultado = state.cart.find(cartItem => cartItem.id == action.payload.id && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))
+                if (state.cart.find(cartItem => cartItem.id == action.payload.id && cartItem.idIngs.length===action.payload.idIngs.length && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
+                    const resultado = state.cart.find(cartItem => cartItem.id == action.payload.id && cartItem.idIngs.length===action.payload.idIngs.length && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))
                     return {
                             ...state,
                              cart: state.cart.map(cartItem => (
                                  cartItem.id === resultado.id
-                                     ? action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i])
+                                     ? cartItem.idIngs.length===action.payload.idIngs.length && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i])
                                          ? { ...cartItem, quantity: cartItem.quantity + 1 }
                                          : cartItem
                                        
@@ -147,7 +147,7 @@ export const ordersReducer = (state = initialState, action) => {
                     
                 }
 
-                if (state.cart.find(cartItem => cartItem.id == action.payload.id && !action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
+                if (state.cart.find(cartItem => cartItem.id == action.payload.id && !(cartItem.idIngs.length===action.payload.idIngs.length) && !action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
 
                     return {
                         ...state,
