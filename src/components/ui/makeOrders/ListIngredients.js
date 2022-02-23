@@ -22,8 +22,7 @@ export const ListIngredients = ({ activeItem = {} }) => {
         dispatch(orderSetIsActive())
         dispatch(orderAddToCart({
             ...activeItem,
-            ingredients,
-            idIng: ingredientsToShow,
+            idIngs:ingredientsToShow.split(', '),
         }))
     }
 
@@ -34,13 +33,13 @@ export const ListIngredients = ({ activeItem = {} }) => {
     return (
         <div className='listIngredients'>
             <div className='listIngredients__body'>
-                {activeItem.ingredients.map((item, index) => (
-                    <div key={item.category + index} className='listIngredients__body__itemList' >
-                        <h2>{item.category}</h2>
-                        {item.ingredients.map((ingredient, index) => (
-                            <div key={ingredient} className="listIngredients__body__itemList__item" onClick={() => handleClickRadio(item.category, ingredient)}>
+                {activeItem.elements.map((item, index) => (
+                    <div key={item.header + index} className='listIngredients__body__itemList' >
+                        <h2>{item.header}</h2>
+                        {item.adjuncts.map((ingredient, index) => (
+                            <div key={ingredient} className="listIngredients__body__itemList__item" onClick={() => handleClickRadio(item.header, ingredient)}>
                                 <p >{ingredient}</p>
-                                <input type="radio" name={item.category} readOnly={ingredient} checked={ingredients[item.category] === ingredient} />
+                                <input type="radio" name={item.header} readOnly={ingredient} checked={ingredients[item.header] === ingredient} />
                             </div>
                         ))}
                     </div>

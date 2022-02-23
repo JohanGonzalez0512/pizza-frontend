@@ -26,10 +26,17 @@ const initialState = {
                 id: 1,
                 name: 'pizza flamas',
                 price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
+                elements: [
+                    {
+                        header: 'ingredientes',
+                        adjuncts: ['Peperoni', 'Jamon', 'Carne molida']
+                    },
+                    {
+                        header: 'ingredientes 2',
+                        adjuncts: ['Peperoni2', 'Carne molida2']
+                    },
+
+
                 ],
             },
             {
@@ -115,24 +122,25 @@ export const ordersReducer = (state = initialState, action) => {
 
         case types.orderAddToCart:
             console.log(action.payload);
-            const cartCoincidence = state.cart.find(item => JSON.stringify(item) === JSON.stringify({ ...action.payload, quantity: item.quantity }));
-            if (cartCoincidence !== undefined) {
-                return {
-                    ...state,
-                    cart: state.cart.map(cartItem =>
-                        cartItem.id === action.payload.id
-                            ? cartItem.idIng === action.payload.idIng
-                                ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                                : cartItem
-                            : cartItem
-                    ),
-                }
-            } else {
+
+            if (!state.cart.find(cartItem => cartItem.id == action.payload.id))
                 return {
                     ...state,
                     cart: [...state.cart, { ...action.payload, quantity: 1 }]
                 }
+
+
+            return {
+                ...state,
+                cart: state.cart.map(cartItem => (
+                    cartItem.id === action.payload.id
+                        ? action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i])
+                            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                            : [cartItem, { ...action.payload, quantity: 1 }] // aqui hay un problemaaaaa
+                        : cartItem
+                )).flat(),
             }
+
 
         default:
             return state;
