@@ -121,26 +121,39 @@ export const ordersReducer = (state = initialState, action) => {
             };
 
         case types.orderAddToCart:
-            console.log(action.payload);
+            
 
-            if (!state.cart.find(cartItem => cartItem.id == action.payload.id))
+            if (!state.cart.find(cartItem => cartItem.id == action.payload.id)){
+                
                 return {
                     ...state,
                     cart: [...state.cart, { ...action.payload, quantity: 1 }]
                 }
-
-
-            return {
-                ...state,
-                cart: state.cart.map(cartItem => (
-                    cartItem.id === action.payload.id
-                        ? action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i])
-                            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                            : [cartItem, { ...action.payload, quantity: 1 }] // aqui hay un problemaaaaa
-                        : cartItem
-                )).flat(),
             }
 
+                if (state.cart.find(cartItem => cartItem.id == action.payload.id && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
+                    const resultado = state.cart.find(cartItem => cartItem.id == action.payload.id && action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))
+                    return {
+                            ...state,
+                             cart: state.cart.map(cartItem => (
+                                 cartItem.id === resultado.id
+                                     ? action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i])
+                                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                                         : cartItem
+                                       
+                                     : cartItem
+                             ))
+                         }
+                    
+                }
+
+                if (state.cart.find(cartItem => cartItem.id == action.payload.id && !action.payload.idIngs.sort().every((element, i) => element == cartItem.idIngs.sort()[i]))){
+
+                    return {
+                        ...state,
+                        cart: [...state.cart, { ...action.payload, quantity: 1 }]
+                    }
+                }
 
         default:
             return state;
