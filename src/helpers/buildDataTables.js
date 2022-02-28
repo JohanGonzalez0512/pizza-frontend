@@ -27,7 +27,7 @@ export const buildDataFertilizer = (id, date, concept, cost, anticipo, restante)
         { element: <SpanTable text={cost} />, searched: false },
         { element: <SpanTable text={anticipo} />, searched: false },
         { element: <SpanTable text={restante} />, searched: false },
-        { element: <ButtonTable type={5} id={id} />, searched: false },
+        { element: <ButtonTable type={1} id={id} />, searched: false },
 
     ];
 }

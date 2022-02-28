@@ -1,5 +1,5 @@
 .select-list {
-    margin-right: 1rem;
+    flex: 0 0 40%;
 
     &__title {
         font-size: 2rem;
@@ -10,6 +10,10 @@
 
         & input {
             width: 100%;
+            
+        }
+        & input:focus {
+            outline: none;
         }
     }
 
@@ -32,16 +36,16 @@
                 filter: brightness(0.8);
             }
 
-            & p {
-            }
+           
         }
     }
 
     &__chosen {
+        border-radius: 2rem;
         margin-top: 1rem;
         text-align: center;
         padding: 1.5rem 2rem;
-        background-color: $color-primary;
+        background-color: darken($color-secondary, $amount: 10);
         color: $color-white;
     }
 }

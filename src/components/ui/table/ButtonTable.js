@@ -24,13 +24,25 @@ export const ButtonTable = ({
         switch (type) {
             case 0:
                 return (
-                    <button className="btn btnTable btnBlue" onClick={(data) => onClick(data)}> <span>{title}</span> <i className="fas fa-eye"> </i> </button>
+                    <button className="btn " onClick={(data) => onClick(data)}> <span>{title}</span> <i className="fas fa-eye"> </i> </button>
                 )
             case 1:
                 return (
-                    <button className="btn btnTable btnBlue" onClick={() => onClick(id)}> <span>{title}</span> <i className="fas fa-edit"></i> </button>
+                    <div className='btnTable__container__editDelete'>
+                        <button className='btnTable__container edit' onClick={() => onClick(id)} >
+                            <svg className="btnTable__container__icon orange">
+                                <use href="/sprite.svg#icon-edit"></use>
+                            </svg>
+                        </button>
+                        <button className='btnTable__container delete' onClick={() => onClick(id)} >
+                            <svg className="btnTable__container__icon red">
+                                <use href="/sprite.svg#icon-trash"></use>
+                            </svg>
+                        </button>
+                    </div>
+
                 )
-            
+
 
             default:
                 return (

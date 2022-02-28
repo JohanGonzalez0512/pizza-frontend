@@ -12,11 +12,11 @@ export const SelectList = ({ item, setItem, items }) => {
         setSearchItem(tempSearch);
 
         if (!tempSearch.length) {
-            setDispItems(documents);
+            setDispItems(items);
             return;
         }
 
-        const tempDocuments = documents.filter(({ name }) => name.toLowerCase().includes(tempSearch.toLowerCase()))
+        const tempDocuments = items.filter(({ name }) => name.toLowerCase().includes(tempSearch.toLowerCase()))
 
         setDispItems(tempDocuments);
 
@@ -34,7 +34,7 @@ export const SelectList = ({ item, setItem, items }) => {
                 {
                     dispItems.map(item => (
                         <div
-                            key={item._id}
+                            key={item.id}
                             onClick={e => setItem(item)}
                             className="item">
                             <p>{`${item.name}`}</p>

@@ -2,21 +2,110 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2.5rem;
+    border-radius: 2rem;
     border: solid 1px #cfcfcf;
-    background-color: $color-white;
-    color: $color-secondary;
+    background-color: $color-secondary;
+    color: $color-white;
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    height: 4rem;
+    width: 17rem;
 
+    &:hover {
+        transition: all 0.3s ease-in-out;
+        background-color: $color-white;
+        color: $color-secondary;
+    }
+}
+.btn-cancel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    border: solid 1px #cfcfcf;
+    background-color: $color-danger;
+    color: $color-white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
     height: 4rem;
     width: 15rem;
 
     &:hover {
         transition: all 0.3s ease-in-out;
-        background-color: $color-secondary;
-        color: $color-white;
+        background-color: $color-white;
+        color: $color-danger;
     }
 }
+
+
+
+.btnTable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+        padding-right: 0.3rem;
+        font-size: 0.8rem;
+        color: initial;
+    }
+    &__container {
+
+        &__editDelete {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+        &.edit {
+            height: 2rem;
+            width: 2rem;
+            background: transparent;
+            border: none;
+        }
+        &.delete {
+            height: 2rem;
+            width: 2rem;
+            background: transparent;
+            border: none;
+        }
+
+        &__icon {
+           
+            height: 2rem;
+            width: 2rem;
+            font-size: 3rem;
+            
+            
+
+            &.red {
+                
+                fill: $color-primary;
+            }
+            &.orange {
+              
+                fill: $color-secondary;
+            }
+        }
+            
+       
+    }
+}
+
+
+
+.btn__container{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    @include respond(phone) {
+        justify-content: center;
+    }
+}
+
+
+
