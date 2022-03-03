@@ -17,8 +17,9 @@ export const types = {
     orderSetActiveItem: '[order] Set active item',
     orderSetIsActive: '[order] Set is active',
     orderAddToCart: '[order] Add to cart',
-
-
+    orderDeleteItemCart:'[order] delete item cart',
+    orderAddQuantity:'[order] add quantity',
+    orderDeleteQuantity:'[order] delete quantity',
     uiSetIsModalOpen: '[ui] Set is modal open',
 
     
