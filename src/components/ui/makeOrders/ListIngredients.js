@@ -23,6 +23,7 @@ export const ListIngredients = ({ activeItem = {} }) => {
         dispatch(orderAddToCart({
             ...activeItem,
             idIngs:ingredientsToShow.split(', '),
+            ingredients:ingredientsToShow
         }))
     }
 

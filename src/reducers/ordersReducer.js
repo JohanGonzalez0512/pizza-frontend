@@ -154,13 +154,13 @@ export const ordersReducer = (state = initialState, action) => {
             }
 
         case types.orderAddQuantity:
-            cartItemFound = state.cart.find(cartItem =>
+            const cartQuantity = state.cart.find(cartItem =>
                 cartItem.id == action.payload.id &&
                 cartItem.idIngs.length === action.payload.idIngs.length &&
                 action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
 
             )
-            cartItemFound.quantity = cartItemFound.quantity + 1
+            cartQuantity.quantity = cartQuantity.quantity + 1
             return {
                 ...state,
 
@@ -168,7 +168,7 @@ export const ordersReducer = (state = initialState, action) => {
                     cartItem.id == action.payload.id &&
                         cartItem.idIngs.length === action.payload.idIngs.length &&
                         action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-                        ? cartItemFound
+                        ? cartQuantity
                         : cartItem
 
                 ))
@@ -176,13 +176,13 @@ export const ordersReducer = (state = initialState, action) => {
             };
         case types.orderDeleteQuantity:
 
-            cartItemFound = state.cart.find(cartItem =>
+            const cartQuantityMinus = state.cart.find(cartItem =>
                 cartItem.id == action.payload.id &&
                 cartItem.idIngs.length === action.payload.idIngs.length &&
                 action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
 
             )
-            cartItemFound.quantity = cartItemFound.quantity - 1
+            cartQuantityMinus.quantity = cartQuantityMinus.quantity - 1
             return {
                 ...state,
 
@@ -190,7 +190,7 @@ export const ordersReducer = (state = initialState, action) => {
                     cartItem.id == action.payload.id &&
                         cartItem.idIngs.length === action.payload.idIngs.length &&
                         action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-                        ? cartItemFound
+                        ? cartQuantityMinus
                         : cartItem
 
                 ))
