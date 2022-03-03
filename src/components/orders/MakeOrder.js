@@ -17,9 +17,9 @@ export const MakeOrder = () => {
     return (
         <div className='container makeOrders'>
             <div className={`card ${isModalOpen && 'modal-active'} `}>
-                <h1 className="card__title">
+                <h2 className="card__title">
                     Hacer pedido
-                </h1>
+                </h2>
 
 
                 {isActiveItem &&

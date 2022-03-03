@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { uiSetIsModalOpen } from '../../actions/ui';
+import { ListPayScreen } from '../ui/ListPayScreen';
 
 export const PayScreen = () => {
 
@@ -8,11 +9,20 @@ export const PayScreen = () => {
 
   const handleClickCancelModal = () => {
     dispatch(uiSetIsModalOpen());
-}
+  }
   return (
-    <>
-        <h1>PayScreen</h1>
-        <button onClick={()=>handleClickCancelModal()} className='btn'>Cancelar</button>
-    </>
+    <div className='PayScreen'>
+
+      <h2 className="card__title">
+        Detalles del pedido
+      </h2>
+
+      <ListPayScreen
+      />
+
+
+
+      <button onClick={() => handleClickCancelModal()} className='btn'>Cancelar</button>
+    </div>
   )
 }

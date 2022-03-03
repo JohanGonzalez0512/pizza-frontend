@@ -55,7 +55,7 @@ export const Navbar = () => {
                         })}>
                             <p className="main-link">Inventario</p>
                             <div className={`submenu  ${subMenusActive.subMenu2 ? 'active' : ''}`}>
-                                <Link to="/inventario" >Productos</Link>
+                                <Link to="/inventario" >Catalogo de Productos</Link>
                                 <Link to="/inventario/categorias" >Categorias</Link>
 
                             </div>

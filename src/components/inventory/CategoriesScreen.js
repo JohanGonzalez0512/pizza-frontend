@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiSetIsModalOpen } from '../../actions/ui';
 import { buildData } from '../../helpers/buildDataTables';
 import { isACoincidenceSearch } from '../../helpers/isACoincidence';
 import { SearchBar } from '../ui/filters/SearchBar';
-import { Select } from '../ui/filters/Select';
+import { Modal } from '../ui/Modal';
 import { Table } from '../ui/Table';
+import { Addcategory } from './Addcategory';
 
 
 const headers = [
@@ -32,7 +35,7 @@ const headers = [
         textAlign: "center",
     },
     {
-        title: "ver",
+        title: "Ver",
         textAlign: "center",
     },
 
@@ -101,12 +104,17 @@ const data = [
         quantity: '20',
         price: '$500'
     },
-    
+
 
 
 ]
 
 export const CategoriesScreen = () => {
+
+    const { ui } = useSelector(state => state);
+    const { isModalOpen } = ui;
+
+    const dispatch = useDispatch();
 
 
     const [valueSearchFilter, setValueSearchFilter] = useState({
@@ -127,13 +135,13 @@ export const CategoriesScreen = () => {
                 [name, code, category, quantity, price],
                 searchWord
             );
-            const dataBuilded = buildData(name, code, category, date_expiraiton, quantity, price,coincidence)
+            const dataBuilded = buildData(name, code, category, date_expiraiton, quantity, price, coincidence)
 
             if (searchWord === "") {
                 dataToShow.push(dataBuilded);
-              } else if (coincidence.includes(true)) {
+            } else if (coincidence.includes(true)) {
                 dataToShow.push(dataBuilded);
-              }
+            }
 
         });
 
@@ -142,13 +150,18 @@ export const CategoriesScreen = () => {
 
     useEffect(() => {
         generateData()
-    }, [data,valueSearchFilter]);
+    }, [data, valueSearchFilter]);
 
 
-   
+    const handleClickOpenModal = () => {
+        dispatch(uiSetIsModalOpen());
+    }
+
+
+
     return (
         <div className='container'>
-            <div className='card'>
+            <div className={`card ${isModalOpen && 'modal-active'}`} >
                 <h1 className="card__title">
                     Categorias
                 </h1>
@@ -157,13 +170,27 @@ export const CategoriesScreen = () => {
                         setValueSearchFilter={setValueSearchFilter}
                         placeholder={'Buscar por nombre'} />
                 </div>
-             
-                    <Table
-                        headers={headers}
-                        data={dataShow}
-                        sizesColumns={[14, 14, 14, 14, 14, 14, 14]}
+
+                <Table
+                    headers={headers}
+                    data={dataShow}
+                    sizesColumns={[14, 14, 14, 14, 14, 14, 14]}
+                />
+                {
+                    isModalOpen &&
+                    <Modal
+                        Component={Addcategory}
                     />
-               
+                }
+                <div className='btn__container'>
+                        <button onClick={()=>handleClickOpenModal()}className='btn-add'>
+                            Agregar categoria
+                        </button>
+                    </div>
+
+
+
+
 
 
 

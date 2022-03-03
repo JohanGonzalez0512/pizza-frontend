@@ -99,9 +99,10 @@
 
 .btn__container{
     margin-top: 2rem;
+    flex:  1;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     @include respond(phone) {
         justify-content: center;
     }

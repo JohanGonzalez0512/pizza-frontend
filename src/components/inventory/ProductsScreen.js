@@ -56,7 +56,7 @@ const headers = [
         textAlign: "center",
     },
     {
-        title: "",
+        title: "‎",
         textAlign: "center",
     },
 
@@ -171,7 +171,7 @@ export const ProductsScreen = () => {
         <div className='container'>
             <div className='card'>
                 <h1 className="card__title">
-                    Productos
+                    Catalogo de productos
                 </h1>
 
 

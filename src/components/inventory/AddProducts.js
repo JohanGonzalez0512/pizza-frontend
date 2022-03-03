@@ -24,7 +24,23 @@ const categories = [
     {
         id:5,
         name:"Categoria 5"
-    }
+    },
+    {
+        id:6,
+        name:"Categoria 5"
+    },
+    {
+        id:7,
+        name:"Categoria 5"
+    },
+    {
+        id:8,
+        name:"Categoria 5"
+    },
+    {
+        id:9,
+        name:"Categoria 5"
+    },
 ]
 
 export const AddProducts = () => {

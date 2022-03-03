@@ -1,6 +1,6 @@
 .select-list {
-    flex: 0 0 40%;
-
+    flex: 0 1 40%;
+    
     &__title {
         font-size: 2rem;
     }
@@ -20,7 +20,7 @@
     &__list {
         border: 1px solid $color-text;
         padding: 1rem;
-        max-height: 30rem;
+        max-height: 25rem;
 
         & .item {
             width: 100%;
