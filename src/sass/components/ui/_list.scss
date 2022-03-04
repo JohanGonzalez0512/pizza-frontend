@@ -1,5 +1,5 @@
 .list {
-    height: 45rem;
+    max-height: 70%;
     overflow: auto;
     &::-webkit-scrollbar {
         display: none;
@@ -35,18 +35,9 @@
                 
             }
             &__bottom-text {
-                display: flex;
-                gap: .4rem;
-                width: 12rem;
-                p {
-                    &:last-child{
-
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-
-                }
+                
+                width:55% ;
+               
             }
         }
 

@@ -187,7 +187,7 @@ export const ordersReducer = (state = initialState, action) => {
                 ...state,
 
                 cart: state.cart.map(cartItem => (
-                    cartItem.id == action.payload.id &&
+                    cartItem.id === action.payload.id &&
                         cartItem.idIngs.length === action.payload.idIngs.length &&
                         action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
                         ? cartQuantityMinus
@@ -196,6 +196,27 @@ export const ordersReducer = (state = initialState, action) => {
                 ))
 
             };
+
+        case types.orderDeleteItemCart:
+
+            let itemToDelete = state.cart.filter(cartItem =>
+                cartItem.id == action.payload.id &&
+                cartItem.idIngs.length === action.payload.idIngs.length
+
+            );
+            if (itemToDelete) itemToDelete = (itemToDelete.find((cartItem) => action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))))
+
+            return {
+                ...state,
+                cart: state.cart.filter(cartItem =>
+                    cartItem.id !== action.payload.id &&
+                    cartItem.idIngs.length !== action.payload.idIngs.length &&
+                    action.payload.idIngs.every((element) => !(cartItem.idIngs.includes(element)))
+
+                )
+
+            };
+
 
 
         default:
