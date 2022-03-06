@@ -43,8 +43,6 @@ export const ListPayScreen = () => {
                                         <p>{item.ingredients}</p>
                                 }
 
-
-
                             </div>
 
                         </div>
