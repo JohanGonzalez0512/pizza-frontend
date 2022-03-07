@@ -7,7 +7,10 @@ body {
     font-family: "Poppins", sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
-
+.DayPicker {
+    display: inline-block;
+    font-size: 1.4rem !important;
+  }
 .swal2-popup {
     font-size: 1.4rem !important;
 }

@@ -36,7 +36,7 @@ export const ListPayScreen = () => {
 
                                 {
                                     item.idIngs.length > 1 ?
-                                        <Marquee gradient={false} delay={2}>
+                                        <Marquee gradient={false} >
                                             <p>{item.ingredients}</p>
                                         </Marquee>
                                         :

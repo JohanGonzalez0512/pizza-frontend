@@ -9,3 +9,33 @@
         margin-bottom: 3rem;
     }
 }
+
+.filter-container {
+    display: flex;
+    width: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3rem;
+    &__description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p {
+            text-align: center;
+            font-size: 2rem;
+        }
+    }
+
+    &__date{
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        
+        width: auto;
+     
+
+    }
+
+}
