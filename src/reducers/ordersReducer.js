@@ -28,13 +28,61 @@ const initialState = {
                 price: '800',
                 elements: [
                     {
+                        type: 'radio',
+                        name:'ingre',
+                        value:'',
                         header: 'ingredientes',
-                        adjuncts: ['Peperoni', 'Jamon', 'Carne molida']
+                        adjuncts: [
+                            {
+                                value:'id_1',
+                                label:'Peperoni'
+
+                            },
+                            {
+                                value:'id_2',
+                                label:'Jamon'
+                            },
+                            {
+                                value:'id_3',
+                                label:'Carne molida'
+                               
+                            },
+                        ],
+                        validations: [
+                            {
+                                type: 'required'
+                            }
+                        ]
                     },
                     {
                         header: 'ingredientes 2',
-                        adjuncts: ['Peperoni2', 'Carne molida2']
+                        type: 'radio',
+
+                        name:'ingre2',
+                        value:'',
+                        adjuncts: [
+                            {
+                                value:'id_1',
+                                label:'Peperoni'
+
+                            },
+                            {
+                                value:'id_2',
+                                label:'Jamon'
+                            },
+                            {
+                                value:'id_3',
+                                label:'Carne molida'
+                               
+                            },
+                        ],
+                        validations: [
+                            {
+                                type: 'required'
+                            }
+                        ]
                     },
+
 
 
                 ],
