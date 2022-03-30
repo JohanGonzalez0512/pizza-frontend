@@ -2,18 +2,21 @@ import logo from '../../resources/logo.png'
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { startLogin } from '../../actions/auth';
+import { useDispatch } from 'react-redux';
 
 export const LoginScreen = () => {
 
 
-
+    const dispatch = useDispatch();
 
     const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'test@gmail.com',
+            password: 'qwerty*123',
         },
         onSubmit: (values) => {
+            dispatch(startLogin(values.email, values.password))
             resetForm()
         },
         validationSchema: Yup.object({

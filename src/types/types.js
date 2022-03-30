@@ -20,7 +20,21 @@ export const types = {
     orderDeleteItemCart:'[order] delete item cart',
     orderAddQuantity:'[order] add quantity',
     orderDeleteQuantity:'[order] delete quantity',
+
+
     uiSetIsModalOpen: '[ui] Set is modal open',
+    uiStartLoading: '[UI] Start loading',
+    uiFinishLoading: '[UI] Finish loading',
+
+
+    categoriesSetActiveCategory: '[categories] Set active category',
+    categoriesClearData: '[categories] Clear data',
+    categoriesSetData: '[categories] Set data',
+    categoriesDeleteCategory: '[categories] Delete category',
+    categoriesAddCategory: '[categories] Add category',
+    categoriesUpdateCategory: '[categories] Update category',
+    categoriesCleanActiveCategory: '[categories] Clean active category',
+    
 
     
 

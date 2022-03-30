@@ -1,9 +1,8 @@
 import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
 import Swal from 'sweetalert2'
-import { clientLogout } from "./passports";
-import { paymentsLogout } from "./payments";
-import { tripLogout } from "./trips";
+
+
 
 
 
@@ -69,19 +68,21 @@ export const startResetPassword = (code, password, history) => {
         }
     }
 }
+
 export const startLogin = (email, password) => {
     return async (dispatch) => {
         dispatch(authCheckingStart());
         try {
             const resp = await fetchSinToken('auth/login', { email, password }, 'POST')
             const body = await resp.json();
+            console.log(body)
             dispatch(authCheckingFinish())
             if (body.ok) {
-                localStorage.setItem('token', body.token);
+                localStorage.setItem('token', body.data.token);
                 localStorage.setItem('token-init-date', new Date().getTime());
                 dispatch(login({
-                    id: body.id,
-                    name: body.name
+                    id: body.data.user.id,
+                    name: body.data.user.name
                 }
                 ))
             }
@@ -106,20 +107,18 @@ export const startLogin = (email, password) => {
 export const startChecking = () => {
     return async (dispatch) => {
         if (localStorage.getItem('token')) {
-            console.log(localStorage.getItem('token'));
             dispatch(authCheckingStart())
-            const resp = await fetchConToken('auth/renew');
+            const resp = await fetchConToken('auth/renew',{}, 'POST');
             const body = await resp.json();
-            console.log(body)
+         
 
             if (body.ok) {
-                localStorage.setItem('token', body.token);
+                localStorage.setItem('token', body.data.token);
                 localStorage.setItem('token-init-date', new Date().getTime());
                 dispatch(login({
-                    id: body.id,
-                    name: body.name
+                    id: body.data.user.id,
+                    name: body.data.user.name
                 }
-
                 ))
                 dispatch(authCheckingFinish())
             }
@@ -129,6 +128,7 @@ export const startChecking = () => {
         }
     }
 }
+
 
 const authCheckingStart = () => ({ type: types.authCheckingStart })
 const authCheckingFinish = () => ({ type: types.authCheckingFinish })
@@ -143,9 +143,7 @@ const login = (user) => ({
 export const startLogout = () => {
     return (dispatch) => {
         localStorage.clear();
-        dispatch(tripLogout())
-        dispatch(clientLogout())
-        dispatch(paymentsLogout())
+      
         dispatch(logout());
     }
 }

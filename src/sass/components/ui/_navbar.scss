@@ -110,8 +110,8 @@
             border-color: $color-white;
         }
 
-        & svg {
-            color: white;
+        &__svg {
+            fill: white;
             margin-right: 1rem;
             height: 2rem;
             width: 2rem;
@@ -120,6 +120,8 @@
         }
 
         & p.name {
+            display: flex;
+            align-items: center;
             font-weight: 700;
             color: white;
             pointer-events: none;
@@ -161,6 +163,16 @@
                 & .main-link {
                     font-weight: 700;
                     overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    &__svg {
+                        fill: white;
+                        margin-right: 1rem;
+                        height: 2rem;
+                        width: 2rem;
+                        font-size: 6rem;
+                        pointer-events: none;
+                    }
                 }
 
                 & .submenu {
@@ -170,10 +182,14 @@
                     overflow: hidden;
                     max-height: 0;
                     transition: max-height 1s ease-out;
+                    
                     a {
                         transform: translateY(-10rem);
                         transition: transform 1s;
+
                     }
+
+                    
                 
                     &.active {
                         max-height: 14rem ;
@@ -195,11 +211,20 @@
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
-       
+        &__svg {
+            fill: white;
+            margin-right: 1rem;
+            height: 2rem;
+            width: 2rem;
+            font-size: 6rem;
+            pointer-events: none;
+        }
 
         & p {
+            display: flex;
+            align-items: center;
             color: $color-white;
-            text-decoration: underline;
+            
             cursor: pointer;
             @include transition;
 

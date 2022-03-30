@@ -17,10 +17,7 @@ export const PayScreen = () => {
         Detalles del pedido
       </h2>
 
-      <ListPayScreen
-      />
-
-
+      <ListPayScreen />
 
       <button onClick={() => handleClickCancelModal()} className='btn'>Cancelar</button>
     </div>

@@ -32,12 +32,9 @@
                 color: #4a4a4a;
                 margin-bottom: 0;
                 color: $color-primary;
-                
             }
             &__bottom-text {
-                
-                width:55% ;
-               
+                width: 55%;
             }
         }
 
@@ -101,7 +98,6 @@
 
         &__itemList {
             margin-bottom: 4rem;
-
             &:last-of-type {
                 margin-bottom: 0;
             }
@@ -126,9 +122,11 @@
                 margin-bottom: 1rem;
                 border: 1px solid #e6e6e6;
                 box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
                 &:last-of-type {
                     margin-bottom: 3rem;
                 }
+
                 p {
                     font-style: italic;
                     font-weight: 500;

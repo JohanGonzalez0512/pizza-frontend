@@ -29,23 +29,23 @@ const initialState = {
                 elements: [
                     {
                         type: 'radio',
-                        name:'ingre',
-                        value:'',
+                        name: 'element',
+                        value: '',
                         header: 'ingredientes',
                         adjuncts: [
                             {
-                                value:'id_1',
-                                label:'Peperoni'
+                                value: 'id_1',
+                                label: 'papas'
 
                             },
                             {
-                                value:'id_2',
-                                label:'Jamon'
+                                value: 'id_2',
+                                label: 'Jadasdsamon'
                             },
                             {
-                                value:'id_3',
-                                label:'Carne molida'
-                               
+                                value: 'id_3',
+                                label: 'Cadasdrne molida'
+
                             },
                         ],
                         validations: [
@@ -56,29 +56,28 @@ const initialState = {
                     },
                     {
                         header: 'ingredientes 2',
-                        type: 'radio',
-
-                        name:'ingre2',
-                        value:'',
+                        type: 'checkbox',
+                        name: 'extras',
+                        value: '',
                         adjuncts: [
                             {
-                                value:'id_1',
-                                label:'Peperoni'
+                                value: 'id_1',
+                                label: 'Peperoni2'
 
                             },
                             {
-                                value:'id_2',
-                                label:'Jamon'
+                                value: 'id_2',
+                                label: 'Jamon2'
                             },
                             {
-                                value:'id_3',
-                                label:'Carne molida'
-                               
+                                value: 'id_3',
+                                label: 'Carne molida3'
+
                             },
                         ],
                         validations: [
                             {
-                                type: 'required'
+                                type: 'requiredCheck'
                             }
                         ]
                     },
@@ -87,66 +86,7 @@ const initialState = {
 
                 ],
             },
-            {
-                id: 2,
-                name: 'pizza flamas2',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            },
-            {
-                id: 3,
-                name: 'pizza flamas3',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            },
-            {
-                id: 4,
-                name: 'pizza flamas4',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            },
-            {
-                id: 5,
-                name: 'pizza flamas4',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            },
-            {
-                id: 6,
-                name: 'pizza flamas4',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            },
-            {
-                id: 7,
-                name: 'pizza flamas4',
-                price: '800',
-                ingredients: [
-                    { category: 'carnes', ingredients: ['Peperoni', 'Jamon', 'Carne molida'] },
-                    { category: 'vegetales', ingredients: ['Tomate', 'Cebolla', 'Lechuga'] },
-                    { category: 'queso', ingredients: ['Queso Manchego', 'Queso parmesano', 'Queso cheddar'] },
-                ],
-            }
+         
         ],
     orderActive: {},
     isActiveItem: false,
@@ -170,15 +110,14 @@ export const ordersReducer = (state = initialState, action) => {
 
         case types.orderAddToCart:
 
-
-
             let cartItemFound = state.cart.filter(cartItem =>
                 cartItem.id == action.payload.id &&
                 cartItem.idIngs.length === action.payload.idIngs.length
-
             );
-            if (cartItemFound) cartItemFound = (cartItemFound.find((cartItem) => action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))))
 
+            if (cartItemFound) cartItemFound = (cartItemFound.find((cartItem) =>
+                action.payload.idIngs.every((element) =>
+                    cartItem.idIngs.includes(element))));
 
             if (!cartItemFound) {
 
@@ -188,7 +127,11 @@ export const ordersReducer = (state = initialState, action) => {
                 }
             }
 
-            cartItemFound.quantity = cartItemFound.quantity + 1
+            cartItemFound.quantity = cartItemFound.quantity + 1;
+
+            cartItemFound.extras ? cartItemFound.price = cartItemFound.price + (cartItemFound.extras.length * 15)
+                : cartItemFound.price = cartItemFound.price;
+
             return {
                 ...state,
                 cart: state.cart.map(cartItem => (
@@ -208,7 +151,9 @@ export const ordersReducer = (state = initialState, action) => {
                 action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
 
             )
-            cartQuantity.quantity = cartQuantity.quantity + 1
+            cartQuantity.quantity = cartQuantity.quantity + 1;
+            cartQuantity.price = cartQuantity.price * cartQuantity.quantity;
+
             return {
                 ...state,
 
@@ -231,6 +176,7 @@ export const ordersReducer = (state = initialState, action) => {
 
             )
             cartQuantityMinus.quantity = cartQuantityMinus.quantity - 1
+            cartQuantity.price = cartQuantity.price * cartQuantity.quantity;
             return {
                 ...state,
 
@@ -246,26 +192,21 @@ export const ordersReducer = (state = initialState, action) => {
             };
 
         case types.orderDeleteItemCart:
+
             let itemToDelete = state.cart.filter(cartItem =>
                 cartItem.id == action.payload.id &&
                 cartItem.idIngs.length === action.payload.idIngs.length
 
             );
-            if (itemToDelete) itemToDelete = (itemToDelete.find((cartItem) => action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))))
+            if (itemToDelete) itemToDelete = (itemToDelete.find((cartItem) => 
+            action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))))
 
-            console.log(itemToDelete)
             return {
                 ...state,
-
                 cart: state.cart.filter(cartItem => (
                     cartItem !== itemToDelete
-
                 ))
-
             }
-
-
-
         default:
             return state;
     }

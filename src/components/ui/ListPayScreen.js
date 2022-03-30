@@ -56,7 +56,7 @@ export const ListPayScreen = () => {
                                 <use href="/sprite.svg#icon-plus"></use>
                             </svg>
                             <h2>MX ${item.price}</h2>
-                            <svg onClick={()=> handleDeleteItem(item)} className="list__itemList__icon delete">
+                            <svg onClick={() => handleDeleteItem(item)} className="list__itemList__icon delete">
                                 <use href="/sprite.svg#icon-trash"></use>
                             </svg>
 

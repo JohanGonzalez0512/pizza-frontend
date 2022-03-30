@@ -8,9 +8,10 @@ export const Navbar = () => {
     const [active, setActive] = useState(false);
     const [subMenusActive, setSubMenus] = useState({
         subMenu1: false,
-        subMenu2: false
+        subMenu2: false,
+        subMenu3: false
     });
-    const { subMenu1, subMenu2 } = subMenusActive;
+    const { subMenu1, subMenu2, subMenu3 } = subMenusActive;
 
     return (
         <>
@@ -26,10 +27,13 @@ export const Navbar = () => {
                 </Link>
 
                 <div className="navbar__user">
-                    {/* <UserSVG/> */}
+                   
 
                     <p className="name">
                         {/* {(user.name) && user.name} */}
+                        <svg className='navbar__user__svg'>
+                            <use href="/sprite.svg#icon-user-circle-o"></use>
+                        </svg>
                         Johan Gonzalez
                     </p>
                 </div>
@@ -40,7 +44,12 @@ export const Navbar = () => {
                             subMenu1: !subMenu1
                         })}>
 
-                            <p className="main-link">Pedidos</p>
+                            <p className="main-link">
+                                <svg className='main-link__svg'>
+                                    <use href="/sprite.svg#icon-shopping-cart"></use>
+                                </svg>
+                                Pedidos
+                            </p>
                             <div className={`submenu  ${subMenusActive.subMenu1 ? 'active' : ''}`}>
                                 <Link to="/pedidos" >Hacer Pedido</Link>
                                 <Link to="/pedidos/historial" >Historial</Link>
@@ -53,21 +62,42 @@ export const Navbar = () => {
                             ...subMenusActive,
                             subMenu2: !subMenu2
                         })}>
-                            <p className="main-link">Inventario</p>
+                            <p className="main-link">
+                                <svg className='main-link__svg'>
+                                    <use href="/sprite.svg#icon-dropbox"></use>
+                                </svg>
+                                Inventario
+                            </p>
                             <div className={`submenu  ${subMenusActive.subMenu2 ? 'active' : ''}`}>
                                 <Link to="/inventario" >Catalogo de Productos</Link>
                                 <Link to="/inventario/categorias" >Categorias</Link>
-
                             </div>
                         </div>
-                        <div className="link">
-                            <Link to="/contabilidad" className="main-link" >Contabilidad</Link>
 
+                        <div className='link' onClick={() => setSubMenus({
+                            ...subMenusActive,
+                            subMenu3: !subMenu3
+                        })}>
+                            <p className="main-link">
+                                <svg className='main-link__svg'>
+                                    <use href="/sprite.svg#icon-calculator"></use>
+                                </svg>
+                                Contabilidad
+                            </p>
+                            <div className={`submenu  ${subMenusActive.subMenu3 ? 'active' : ''}`}>
+                                <Link to="/contabilidad/reporte" >Generar Reporte</Link>
+                                <Link to="/contabilidad/gastos" >Gastos</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="navbar__logout">
-                    <p>Cerrar sesión</p>
+                    <p>
+                        <svg className='navbar__logout__svg'>
+                            <use href="/sprite.svg#icon-sign-out"></use>
+                        </svg>
+                        Cerrar sesión
+                    </p>
                 </div>
             </nav>
         </>

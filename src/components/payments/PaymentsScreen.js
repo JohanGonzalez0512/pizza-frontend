@@ -10,9 +10,7 @@ const initial = {
     from: "",
     to: ""
 }
-const defaultProps = {
-    numberOfMonths: 1,
-};
+
 export const PaymentsScreen = () => {
     const [initialState, setInitialState] = useState(initial)
     const handleDayClick = (day) => {
@@ -20,16 +18,12 @@ export const PaymentsScreen = () => {
         setInitialState(range);
 
     }
-    console.log(initialState)
-
     const handleResetClick = () => {
         setInitialState(initial)
     }
     const { from, to } = initialState;
     const modifiers = { start: from, end: to };
-    const [valueSearchFilter, setValueSearchFilter] = useState({
-        searchWord: "",
-    });
+
 
 
 
@@ -38,7 +32,7 @@ export const PaymentsScreen = () => {
         <div className='container'>
             <div className='card'>
                 <h1 className="card__title">
-                    Contabilidad
+                    Generar reporte
                 </h1>
                 <div className='filter-container'>
                     <div className='filter-container__description'>
@@ -46,18 +40,14 @@ export const PaymentsScreen = () => {
                         <p >
                             {!from && !to && 'Por favor seleccione el primer dia.'}
                             {from && !to && 'Por favor seleccione el ultimo dia. '}
-                            {from &&
-                                to &&
-                                `Seleccionado desde ${from.toLocaleDateString()} hasta
-                ${to.toLocaleDateString()}`}{' '}
+                            {from && to && `Seleccionado desde ${from.toLocaleDateString()} hasta
+                                 ${to.toLocaleDateString()}`}{' '}
                         </p>
                     </div>
                     <div className='filter-container__date'>
 
                         <DayPicker
-                            style={{
-                                fontSize:'2rem'
-                            }}
+
                             className="Selectable"
                             numberOfMonths={2}
                             selectedDays={[from, { from, to }]}
@@ -69,11 +59,17 @@ export const PaymentsScreen = () => {
 
                 </div>
                 <div className='buttons'>
-                    {from && to && (
-                        <button className="btn-cancel" onClick={handleResetClick}>
-                            Reiniciar
-                        </button>
-                    )}
+                    {from && to &&
+                        <>
+
+                            <button className="btn-cancel" onClick={handleResetClick}>
+                                Reiniciar
+                            </button>
+                            <button className="btn-add" onClick={handleResetClick}>
+                                Generar Reporte
+                            </button>
+                        </>
+                    }
                 </div>
             </div>
 

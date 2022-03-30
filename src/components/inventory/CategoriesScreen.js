@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { categoriesStartGetCategories } from '../../actions/category';
 import { uiSetIsModalOpen } from '../../actions/ui';
-import { buildData } from '../../helpers/buildDataTables';
+import { builDataCategories, buildData } from '../../helpers/buildDataTables';
 import { isACoincidenceSearch } from '../../helpers/isACoincidence';
 import { SearchBar } from '../ui/filters/SearchBar';
 import { Modal } from '../ui/Modal';
@@ -12,33 +13,13 @@ import { Addcategory } from './Addcategory';
 const headers = [
     {
         title: "Nombre",
-        textAlign: "center",
+        textAlign: "left",
     },
-    {
-        title: "Codigo",
-        textAlign: "center",
-    },
-    {
-        title: "Categoria",
-        textAlign: "center",
-    },
-    {
-        title: "VIable hasta",
-        textAlign: "center",
-    },
-    {
-        title: "Cantidad",
-        textAlign: "center",
-    },
-    {
-        title: "Precio",
-        textAlign: "center",
-    },
+
     {
         title: "Ver",
         textAlign: "center",
     },
-
 
 ];
 
@@ -49,61 +30,16 @@ const headers = [
 
 const data = [
     {
+        id: 1,
         name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
+
     },
     {
+        id: 2,
         name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
+
     },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
+
 
 
 
@@ -111,11 +47,16 @@ const data = [
 
 export const CategoriesScreen = () => {
 
-    const { ui } = useSelector(state => state);
+    const { ui, categories: {data , activeCategory} } = useSelector(state => state);
     const { isModalOpen } = ui;
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(categoriesStartGetCategories());
+    }, []);
 
+
+    const dispatch = useDispatch();
+    
 
     const [valueSearchFilter, setValueSearchFilter] = useState({
         searchWord: "",
@@ -123,19 +64,24 @@ export const CategoriesScreen = () => {
     const [dataShow, setDataShow] = useState([])
 
 
-    const { searchWord } = valueSearchFilter
+    const handleClick = (id) => {
+        console.log(id)
+    }
+    const handleClick2 = (id) => {
+        console.log(id)
+    }
 
 
 
     const generateData = () => {
         const dataToShow = [];
         const { searchWord } = valueSearchFilter;
-        data.forEach(({ name, code, category, date_expiraiton, quantity, price }) => {
+        data.forEach(({ id, name }) => {
             const coincidence = isACoincidenceSearch(
-                [name, code, category, quantity, price],
+                [name],
                 searchWord
             );
-            const dataBuilded = buildData(name, code, category, date_expiraiton, quantity, price, coincidence)
+            const dataBuilded = builDataCategories(id, name, handleClick, handleClick2, coincidence)
 
             if (searchWord === "") {
                 dataToShow.push(dataBuilded);
@@ -166,7 +112,8 @@ export const CategoriesScreen = () => {
                     Categorias
                 </h1>
                 <div className='filters__container'>
-                    <SearchBar valueSearchFilter={valueSearchFilter}
+                    <SearchBar
+                        valueSearchFilter={valueSearchFilter}
                         setValueSearchFilter={setValueSearchFilter}
                         placeholder={'Buscar por nombre'} />
                 </div>
@@ -174,7 +121,7 @@ export const CategoriesScreen = () => {
                 <Table
                     headers={headers}
                     data={dataShow}
-                    sizesColumns={[14, 14, 14, 14, 14, 14, 14]}
+                    sizesColumns={[80, 20]}
                 />
                 {
                     isModalOpen &&
@@ -183,16 +130,10 @@ export const CategoriesScreen = () => {
                     />
                 }
                 <div className='btn__container'>
-                        <button onClick={()=>handleClickOpenModal()}className='btn-add'>
-                            Agregar categoria
-                        </button>
-                    </div>
-
-
-
-
-
-
+                    <button onClick={() => handleClickOpenModal()} className='btn-add'>
+                        Agregar categoria
+                    </button>
+                </div>
 
             </div>
         </div>
