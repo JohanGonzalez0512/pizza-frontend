@@ -21,34 +21,9 @@ export const ListIngredients = ({ activeItem = {} }) => {
 
 
     const handleClickAddCart = (values) => {
-        console.log(values);
-        const { element, ...restValues } = values;
         dispatch(orderSetIsActive())
-        dispatch(orderAddToCart({
-            id: activeItem.id,
-            name: activeItem.name,
-            price: activeItem.price,
-            idIngs: values.element instanceof Array ? values.element : [values.element],
-
-            ingredients: ``,
-            ...restValues
-        }))
+        dispatch(orderAddToCart(values))
     }
-
-
-    // const example = {
-    //     id: 1,
-    //     name: 'Pizza flamas 1',
-    //     price: '$100',
-    //     idIngs: ['id1', 'id2', 'id3'],
-    //     idIngs: [{ id: 'id1', name: 'Ingrediente 1' }, { id: 'id2', name: 'Ingrediente 2' }, { id: 'id3', name: 'Ingrediente 3' }],
-    //     extras: ['id1', 'id2', 'id3'],
-    //     refrescos: ['id1', 'id2', 'id3'],
-    //     papas: ['id1', 'id2', 'id3'],
-    //     elementsToshow: [
-
-    //     ]
-    // }
 
 
     return (
@@ -69,8 +44,8 @@ export const ListIngredients = ({ activeItem = {} }) => {
                                         <h2>{item.header}</h2>
                                         {
                                             item.type === 'radio'
-                                                ? <RadioForm item={item} setFieldValue={setFieldValue} />
-                                                : <CheckForm item={item} setFieldValue={setFieldValue} />
+                                                ? <RadioForm item={item} setFieldValue={setFieldValue} values={values} />
+                                                : <CheckForm item={item} setFieldValue={setFieldValue} values={values} />
                                         }
                                     </div>
                                 ))

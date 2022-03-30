@@ -36,7 +36,6 @@ const initialState = {
                             {
                                 value: 'id_1',
                                 label: 'papas'
-
                             },
                             {
                                 value: 'id_2',
@@ -50,7 +49,7 @@ const initialState = {
                         ],
                         validations: [
                             {
-                                type: 'required'
+                                type: 'requiredRadio'
                             }
                         ]
                     },
@@ -58,7 +57,7 @@ const initialState = {
                         header: 'ingredientes 2',
                         type: 'checkbox',
                         name: 'extras',
-                        value: '',
+                        value: [],
                         adjuncts: [
                             {
                                 value: 'id_1',
@@ -86,11 +85,12 @@ const initialState = {
 
                 ],
             },
-         
+
         ],
     orderActive: {},
     isActiveItem: false,
     cart: [],
+    FinalPrice: 0,
 };
 
 
@@ -109,104 +109,58 @@ export const ordersReducer = (state = initialState, action) => {
             };
 
         case types.orderAddToCart:
+            return {
+                ...state,
+                cart: [
+                    ...state.cart,
+                    {
+                        id: state.orderActive.id,
+                        name: state.orderActive.name,
+                        price: parseInt(state.orderActive.price) + action.payload.extras.length * 15,
+                        startPrice: parseInt(state.orderActive.price) + action.payload.extras.length * 15,
+                        quantity: 1,
+                        ...action.payload
+                    }
+                ],
+            };
 
-            let cartItemFound = state.cart.filter(cartItem =>
-                cartItem.id == action.payload.id &&
-                cartItem.idIngs.length === action.payload.idIngs.length
-            );
+        case types.orderAddQuantity:
+            return {
+                ...state,
+                cart: state.cart.map((item, i) => (
+                    {
+                        ...item,
+                        quantity: item.quantity + (i === action.payload ? 1 : 0), //si es el mismo item suma 1
+                        price: item.startPrice * (item.quantity + (i === action.payload ? 1 : 0))
+                    }
+                ))
+            };
+        case types.orderMinusQuantity:
 
-            if (cartItemFound) cartItemFound = (cartItemFound.find((cartItem) =>
-                action.payload.idIngs.every((element) =>
-                    cartItem.idIngs.includes(element))));
-
-            if (!cartItemFound) {
-
+            if (state.cart[action.payload].quantity === 1) {
                 return {
                     ...state,
-                    cart: [...state.cart, { ...action.payload, quantity: 1 }]
+                    cart: state.cart.filter((_, i) => i !== action.payload)
                 }
             }
 
-            cartItemFound.quantity = cartItemFound.quantity + 1;
-
-            cartItemFound.extras ? cartItemFound.price = cartItemFound.price + (cartItemFound.extras.length * 15)
-                : cartItemFound.price = cartItemFound.price;
-
             return {
                 ...state,
-                cart: state.cart.map(cartItem => (
-                    cartItem.id == action.payload.id &&
-                        cartItem.idIngs.length === action.payload.idIngs.length &&
-                        action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-                        ? cartItemFound
-                        : cartItem
-
+                cart: state.cart.map((item, i) => (
+                    {
+                        ...item,
+                        quantity: item.quantity - (i === action.payload ? 1 : 0),
+                        price: item.startPrice * (item.quantity - (i === action.payload ? 1 : 0))
+                    }
                 ))
-            }
-
-        case types.orderAddQuantity:
-            const cartQuantity = state.cart.find(cartItem =>
-                cartItem.id == action.payload.id &&
-                cartItem.idIngs.length === action.payload.idIngs.length &&
-                action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-
-            )
-            cartQuantity.quantity = cartQuantity.quantity + 1;
-            cartQuantity.price = cartQuantity.price * cartQuantity.quantity;
-
-            return {
-                ...state,
-
-                cart: state.cart.map(cartItem => (
-                    cartItem.id == action.payload.id &&
-                        cartItem.idIngs.length === action.payload.idIngs.length &&
-                        action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-                        ? cartQuantity
-                        : cartItem
-
-                ))
-
-            };
-        case types.orderDeleteQuantity:
-
-            const cartQuantityMinus = state.cart.find(cartItem =>
-                cartItem.id == action.payload.id &&
-                cartItem.idIngs.length === action.payload.idIngs.length &&
-                action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-
-            )
-            cartQuantityMinus.quantity = cartQuantityMinus.quantity - 1
-            cartQuantity.price = cartQuantity.price * cartQuantity.quantity;
-            return {
-                ...state,
-
-                cart: state.cart.map(cartItem => (
-                    cartItem.id === action.payload.id &&
-                        cartItem.idIngs.length === action.payload.idIngs.length &&
-                        action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))
-                        ? cartQuantityMinus
-                        : cartItem
-
-                ))
-
             };
 
         case types.orderDeleteItemCart:
-
-            let itemToDelete = state.cart.filter(cartItem =>
-                cartItem.id == action.payload.id &&
-                cartItem.idIngs.length === action.payload.idIngs.length
-
-            );
-            if (itemToDelete) itemToDelete = (itemToDelete.find((cartItem) => 
-            action.payload.idIngs.every((element) => cartItem.idIngs.includes(element))))
-
             return {
                 ...state,
-                cart: state.cart.filter(cartItem => (
-                    cartItem !== itemToDelete
-                ))
-            }
+                cart: state.cart.filter((_, i) => i !== action.payload)
+            };
+
         default:
             return state;
     }

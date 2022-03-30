@@ -3,21 +3,29 @@ import React from 'react'
 
 export const CheckForm = ({ item = [], setFieldValue, values }) => {
 
-    const handleClickCheck = ({ target }) => setFieldValue('extras', [target.name, target.value])
+    const handleClickCheck = ({ target }) => {
 
-// d
-//     extras : [ 'id1', 'label' ]
-//     lbels : [ 
-//         {
-//             name : 'extras',
-//             labels : [ 'label1', 'label2' ]
-//         }
-//         ,{
-//             name : 'refrescos',
-//             labels : [ 'label1', 'label2' ]
-//         } ]
+        const { name, value } = target
+
+        const { extras } = values
+
+        let newAdded = true;
+
+        const newExtras = extras.map(extra => {
+            if (extra.name === name) {
+                newAdded = false
+                return undefined
+            }
+            return extra
+        }).filter(extra => extra !== undefined)
 
 
+        if (newAdded) {
+            newExtras.push({ name, value })
+        }
+
+        setFieldValue('extras', newExtras)
+    }
 
     return (
         <>
@@ -28,7 +36,6 @@ export const CheckForm = ({ item = [], setFieldValue, values }) => {
                         <input type='checkbox' name={label} value={value} onClick={handleClickCheck} />
                         {/* <Field key={value} type={item.type} name={item.name} value={value} /> */}
                     </label>
-
                 ))
             }
             <ErrorMessage name={item.name} />

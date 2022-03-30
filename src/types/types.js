@@ -19,7 +19,7 @@ export const types = {
     orderAddToCart: '[order] Add to cart',
     orderDeleteItemCart:'[order] delete item cart',
     orderAddQuantity:'[order] add quantity',
-    orderDeleteQuantity:'[order] delete quantity',
+    orderMinusQuantity:'[order] delete quantity',
 
 
     uiSetIsModalOpen: '[ui] Set is modal open',

@@ -2,9 +2,13 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import logo from '../../resources/logo.png'
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../actions/auth';
 
 
 export const Navbar = () => {
+
+    const dispatch = useDispatch();
     const [active, setActive] = useState(false);
     const [subMenusActive, setSubMenus] = useState({
         subMenu1: false,
@@ -92,7 +96,7 @@ export const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar__logout">
-                    <p>
+                    <p onClick={()=>dispatch(startLogout())}>
                         <svg className='navbar__logout__svg'>
                             <use href="/sprite.svg#icon-sign-out"></use>
                         </svg>

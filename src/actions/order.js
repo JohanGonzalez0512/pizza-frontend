@@ -17,8 +17,8 @@ export const orderAddQuantity = (order) => ({
     type: types.orderAddQuantity,
     payload: order
 })
-export const orderDeleteQuantity = (order) => ({
-    type: types.orderDeleteQuantity,
+export const orderMinusQuantity = (order) => ({
+    type: types.orderMinusQuantity,
     payload: order
 })
 export const orderDeleteItemCart = (order) => ({

@@ -17,6 +17,11 @@ export const validationsInputs = (dataForm) => {
                     const yupsSchema = {
                         'required': Yup.string().required('Introduzca los datos correspondientes.'),
                         'requiredCheck': Yup.array().min(1, 'Introduzca los datos correspondientes').required('Introduzca los datos correspondientes.'),
+                        'requiredRadio': Yup.object().shape(
+                            { name: Yup.string('asdfs'), value: Yup.string('asdfs') }
+                        ).required('Introduzca los datos correspondientes.'),
+
+
                     }
                     if (yupsSchema[rule.type]) {
                         schema = !schema ? yupsSchema[rule.type] : schema.concat(yupsSchema[rule.type]);

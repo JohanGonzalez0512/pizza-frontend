@@ -5,10 +5,12 @@
         display: none;
     }
     &__itemList {
+        overflow: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 6.5rem;
+        min-height: 10rem;
+
         padding: 0 1.5rem;
         border-radius: 2rem;
         margin-bottom: 1rem;
@@ -19,13 +21,56 @@
             display: flex;
             gap: 2rem;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            flex: 1;
+            min-height: 5rem;
+            &__price {
+                display: flex;
+                gap: 2rem;
+            }
+            &__buttons {
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+                position: absolute;
+                right: 18%;
+                width: 10rem;
+                justify-content: space-between;
+                svg {
+                    width: 3rem;
+                }
+                h2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+        @include respond(phone) {
+            position: relative;
+            flex-wrap: wrap;
+            padding: 1rem 1rem 0 1rem;
+            &__interactions {
+                width: 100%;
+                gap: 0;
+                justify-content: space-between;
+
+                &__buttons {
+                    position: relative;
+                    left: initial;
+                    right: initial;
+                }
+            }
         }
 
         &:last-of-type {
             margin-bottom: 3rem;
         }
         &__textDescription {
+            margin-right: 5rem;
             p {
                 font-size: 1.2rem;
                 font-weight: 600;
@@ -34,7 +79,16 @@
                 color: $color-primary;
             }
             &__bottom-text {
-                width: 55%;
+                width: 100%;
+                &-mainIngredient {
+                    color: #4a4a4a !important;
+                }
+                &-extras {
+                    color: #868686 !important;
+                }
+                &-price {
+                    color: #4a4a4a !important;
+                }
             }
         }
 
@@ -171,9 +225,11 @@
         left: 0;
         width: 100%;
         height: 6rem;
+
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         background-color: $color-white;
         display: flex;
+
         align-items: center;
         justify-content: space-between;
         padding: 2rem;
@@ -181,5 +237,10 @@
         text-overflow: ellipsis;
         overflow: hidden;
         border: solid 1px #e6e6e6;
+
+        @include respond(phone) {
+            flex-wrap: wrap;
+            height: 20rem;
+        }
     }
 }

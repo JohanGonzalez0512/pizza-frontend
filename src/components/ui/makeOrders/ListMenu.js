@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
-import { Cart } from '../Cart'
+import React, { useEffect, useState } from 'react'
 import { SearchBar } from '../filters/SearchBar'
-import { Select } from '../filters/Select'
 import { List } from '../List'
 
 export const ListMenu = ({
-    options,
     itemListData
 }) => {
 
     const [valueSearchFilter, setValueSearchFilter] = useState({
         searchWord: "",
     });
+    const [dataList, setDataList] = useState(itemListData);
+    useEffect(() => {
+
+        const data = [];
+        const regex = new RegExp(valueSearchFilter.searchWord, 'g');
+        itemListData.forEach(element => element.name.match(regex) && data.push(element));
+        setDataList(data);
+
+    }, [valueSearchFilter])
 
     return (
         <>
             <div className='filters__container'>
-                <Select
-                    options={options}
-                    setValueSearchFilter={setValueSearchFilter}
-                    defaultValue={'Buscar por categoria'}
-                />
                 <SearchBar
                     valueSearchFilter={valueSearchFilter}
                     setValueSearchFilter={setValueSearchFilter}
@@ -29,7 +30,7 @@ export const ListMenu = ({
             </div>
 
             <List
-                data={itemListData}
+                data={dataList}
                 filter={valueSearchFilter}
             />
 
