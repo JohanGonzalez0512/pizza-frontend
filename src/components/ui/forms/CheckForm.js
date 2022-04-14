@@ -6,12 +6,12 @@ export const CheckForm = ({ item = [], setFieldValue, values }) => {
     const handleClickCheck = ({ target }) => {
 
         const { name, value } = target
-
-        const { extras } = values
+        console.log(values)
+        const data = values[item.name]
 
         let newAdded = true;
 
-        const newExtras = extras.map(extra => {
+        const newExtras = data.map(extra => {
             if (extra.name === name) {
                 newAdded = false
                 return undefined
@@ -24,7 +24,7 @@ export const CheckForm = ({ item = [], setFieldValue, values }) => {
             newExtras.push({ name, value })
         }
 
-        setFieldValue('extras', newExtras)
+        setFieldValue(item.name, newExtras)
     }
 
     return (

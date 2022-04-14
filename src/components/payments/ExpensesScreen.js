@@ -1,9 +1,33 @@
 import React from 'react'
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { ExpenseStartCreateExpense } from '../../actions/payments';
 
 export const ExpensesScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
+        initialValues: {
+            concept: '',
+            total: '',
+        },
+        onSubmit: (values) => {
+             dispatch(ExpenseStartCreateExpense(values))
+             resetForm()
+        },
+        validationSchema: Yup.object({
+            concept: Yup.string()
+                .required('Requerido'),
+            total: Yup.number()
+                .required('Requerido'),
+        })
+    });
+
     return (
         <div className="container">
-            <div className="card">
+            <form onSubmit={handleSubmit}className="card">
                 <h1 className="card__title">
                     Gastos
                 </h1>
@@ -11,17 +35,15 @@ export const ExpensesScreen = () => {
                     <div className="col">
                         <div className="card__form__item">
                             <label htmlFor="name">Concepto</label>
-                            <input
-                                name='concept'
-                                type="text" />
+                            <input type="text" {...getFieldProps('concept')} />
+                            {touched.concept && errors.concept && <span>{errors.concept}</span>}
                         </div>
-                        
+
                         <div className="card__form__item">
                             <label htmlFor="name">Monto</label>
-                            <input
-                                name='amount'
-                                type="number" />
-                       
+                            <input type="number" {...getFieldProps('total')} />
+                            {touched.total && errors.total && <span>{errors.total}</span>}
+
                         </div>
                     </div>
 
@@ -29,16 +51,16 @@ export const ExpensesScreen = () => {
 
                 <div className="buttons">
 
-                    <button className="btn-cancel" >
+                    <button className="btn-cancel" onClick={resetForm} >
                         Reiniciar
                     </button>
-                    <button className="btn-add" >
+                    <button  type="submit" className="btn-add" >
                         Generar Gasto
                     </button>
 
 
                 </div>
-            </div>
+            </form>
 
         </div>
     )

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { categoriesStartGetCategories } from '../../actions/category';
+import { categoriesSetActiveCategory, categoriesStartDelete, categoriesStartGetCategories } from '../../actions/category';
 import { uiSetIsModalOpen } from '../../actions/ui';
-import { builDataCategories, buildData } from '../../helpers/buildDataTables';
+import { builDataCategories } from '../../helpers/buildDataTables';
 import { isACoincidenceSearch } from '../../helpers/isACoincidence';
 import { SearchBar } from '../ui/filters/SearchBar';
 import { Modal } from '../ui/Modal';
@@ -17,15 +17,11 @@ const headers = [
     },
 
     {
-        title: "Ver",
+        title: "‎",
         textAlign: "center",
     },
 
 ];
-
-
-
-
 
 
 const data = [
@@ -47,7 +43,7 @@ const data = [
 
 export const CategoriesScreen = () => {
 
-    const { ui, categories: {data , activeCategory} } = useSelector(state => state);
+    const { ui, categories: {data } } = useSelector(state => state);
     const { isModalOpen } = ui;
 
     useEffect(() => {
@@ -65,10 +61,12 @@ export const CategoriesScreen = () => {
 
 
     const handleClick = (id) => {
-        console.log(id)
+        dispatch(categoriesSetActiveCategory(id))
+        handleClickOpenModal();
     }
+    
     const handleClick2 = (id) => {
-        console.log(id)
+        dispatch(categoriesStartDelete(id));
     }
 
 
@@ -81,7 +79,7 @@ export const CategoriesScreen = () => {
                 [name],
                 searchWord
             );
-            const dataBuilded = builDataCategories(id, name, handleClick, handleClick2, coincidence)
+            const dataBuilded = builDataCategories(id, name, handleClick, handleClick2,{id, name}, coincidence)
 
             if (searchWord === "") {
                 dataToShow.push(dataBuilded);

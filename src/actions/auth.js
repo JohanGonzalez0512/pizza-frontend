@@ -18,7 +18,7 @@ export const startSendEmail = (email, history) => {
                     text: body.msg,
                     icon: 'success'
                 });
-               
+
                 history.push("/auth/restore-password");
             }
             else {
@@ -52,7 +52,7 @@ export const startResetPassword = (code, password, history) => {
                     text: body.msg,
                     icon: 'success'
                 });
-               
+
                 history.push("/auth/login");
             }
             else {
@@ -82,7 +82,7 @@ export const startLogin = (email, password) => {
                 localStorage.setItem('token-init-date', new Date().getTime());
                 dispatch(login({
                     id: body.data.user.id,
-                    name: body.data.user.name
+                    name: body.data.user.fullname
                 }
                 ))
             }
@@ -108,16 +108,16 @@ export const startChecking = () => {
     return async (dispatch) => {
         if (localStorage.getItem('token')) {
             dispatch(authCheckingStart())
-            const resp = await fetchConToken('auth/renew',{}, 'POST');
+            const resp = await fetchConToken('auth/renew', {}, 'POST');
             const body = await resp.json();
-         
+
 
             if (body.ok) {
                 localStorage.setItem('token', body.data.token);
                 localStorage.setItem('token-init-date', new Date().getTime());
                 dispatch(login({
                     id: body.data.user.id,
-                    name: body.data.user.name
+                    name: body.data.user.fullname
                 }
                 ))
                 dispatch(authCheckingFinish())
@@ -143,7 +143,7 @@ const login = (user) => ({
 export const startLogout = () => {
     return (dispatch) => {
         localStorage.clear();
-      
+
         dispatch(logout());
     }
 }

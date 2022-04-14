@@ -1,22 +1,37 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+
 import { uiSetIsModalOpen } from '../../actions/ui';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { categoriesCleanActiveCategory, categoriesStartCreateCategory, categoriesStartUpdateCategory } from '../../actions/category';
 
 export const Addcategory = () => {
     const dispatch = useDispatch();
     const handleClickCancelModal = () => {
-        dispatch(uiSetIsModalOpen());
-    }
-    const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
-        initialValues: {
-            name: '',
 
+        dispatch(uiSetIsModalOpen());
+        dispatch(categoriesCleanActiveCategory());
+    }
+    const {categories: { activeCategory} } = useSelector(state => state);
+    
+    
+    const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
+       
+        initialValues: {
+            name:  activeCategory ? activeCategory.name :'',  
         },
         onSubmit: (values) => {
+            if (activeCategory) {
+                
+                dispatch(categoriesStartUpdateCategory(activeCategory.id,values));
+                dispatch(categoriesCleanActiveCategory());
+            }
+            else {
+                dispatch(categoriesStartCreateCategory(values));
+            }
             resetForm()
+            handleClickCancelModal()
         },
         validationSchema: Yup.object({
             name: Yup.string()
@@ -28,7 +43,7 @@ export const Addcategory = () => {
     return (
         <div className='add-category'>
             <h2 className="card__title">
-                Agregar nueva categoria
+                Agregar o editar una categoria
             </h2>
 
             <form onSubmit={handleSubmit} className="add-category__form" >
@@ -48,7 +63,7 @@ export const Addcategory = () => {
                             Cancelar
                         </button>
                         <button type="submit" className="btn-add">
-                            Agregar producto
+                            Agregar categoria
                         </button>
                     </div>
 

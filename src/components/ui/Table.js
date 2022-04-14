@@ -7,8 +7,8 @@ export const Table = ({
     data = [], // array of objects with keys matching headers 
     sizesColumns = [], // array of numbers
 }) => {
-    // const { loading } = useSelector(state => state.ui);
-    let loading = false
+    const { loading } = useSelector(state => state.ui);
+   
     return (
         <div className="table ">
             {loading ?

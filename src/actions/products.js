@@ -3,15 +3,15 @@ import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
-export const categoriesStartGetCategories = () => {
+export const productsStartGetProducts = () => {
     return async (dispatch) => {
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories`)
+            const res = await fetchConToken(`products`)
             const body = await res.json()
             if (body.ok) {
-                dispatch(categoriesSetData(body.data.product_categories))
+                dispatch(productsSetData(body.data.products))
             } else {
                 console.log(body)
                 Swal.fire({
@@ -29,13 +29,17 @@ export const categoriesStartGetCategories = () => {
     }
 }
 
-export const categoriesStartCreateCategory = (data) => {
+export const productsStartCreateProduct = (data, category) => {
     return async (dispatch) => {
-       
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories`, data , 'POST')
+            const res = await fetchConToken(`products`, {
+                ...data,
+                category:{
+                    id: category
+                }
+            } , 'POST')
             const body = await res.json()
             if (body.ok) {
                 Swal.fire({
@@ -43,7 +47,7 @@ export const categoriesStartCreateCategory = (data) => {
                     text: 'El registro se ha guardado correctamente',
                     icon: 'success',
                 })
-                dispatch(categoriesAddCategory(body.data.category));
+                dispatch(productsAddProduct(body.data.product));
 
             } else {
                 console.log(body)
@@ -63,21 +67,28 @@ export const categoriesStartCreateCategory = (data) => {
 }
 
 
-export const categoriesStartUpdateCategory = (id, data) => {
-    return async (dispatch) => {
+export const productsStartUpdateProduct = (id, data, category) => {
+    return async (dispatch,) => {
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories/${id}`, data, 'PUT')
+            const res = await fetchConToken(`products/${id}`, {
+                ...data,
+                category:{
+                    id: category
+                }
+
+            }, 'PUT')
             const body = await res.json()
             if (body.ok) {
+
                 Swal.fire({
                     title: '¡Actualizado!',
                     text: 'El registro se ha actualizado correctamente',
                     icon: 'success',
                 })
                 console.log(body)
-                dispatch(categoriesUpdateCategory(body.data.category));
+                dispatch(productsUpdateProduct(body.data.product));
             } else {
                 console.log(body)
                 Swal.fire({
@@ -95,21 +106,22 @@ export const categoriesStartUpdateCategory = (id, data) => {
     }
 }
 
-export const categoriesStartDelete = (id) => {
+export const productsStartDelete = (id) => {
     return async (dispatch) => {
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories/${id}`, {}, 'DELETE')
+            const res = await fetchConToken(`products/${id}`, {}, 'DELETE')
             const body = await res.json()
             if (body.ok) {
+
                 Swal.fire({
                     title: '¡Eliminado!',
                     text: 'El registro se ha eliminado correctamente',
                     icon: 'success',
                 })
                 console.log(body)
-                dispatch(categoriesDeleteCategory(body.data.category));
+                dispatch(productsDeleteProduct(body.data.product));
             } else {
                 console.log(body)
                 Swal.fire({
@@ -126,37 +138,37 @@ export const categoriesStartDelete = (id) => {
     }
 }
 
-const categoriesSetData = (data) => ({
-    type: types.categoriesSetData,
+const productsSetData = (data) => ({
+    type: types.productsSetData,
     payload: data
 });
 
-export const categoriesSetActiveCategory = (category) => ({
-    type: types.categoriesSetActiveCategory,
-    payload: category
+export const productsSetActiveProduct = (product) => ({
+    type: types.productsSetActiveProduct,
+    payload: product
 });
 
-const categoriesAddCategory = (category) => ({
-    type: types.categoriesAddCategory,
-    payload: category
+const productsAddProduct = (product) => ({
+    type: types.productsAddProduct,
+    payload: product
 });
 
-const categoriesDeleteCategory = (category) => ({
-    type: types.categoriesDeleteCategory,
-    payload: category
+const productsDeleteProduct = (product) => ({
+    type: types.productsDeleteProduct,
+    payload: product
 });
-const categoriesUpdateCategory = (category) => ({  
-    type: types.categoriesUpdateCategory,
-    payload: category
-});
-
-
-export const categoriesCleanActiveCategory = () => ({
-    type: types.categoriesCleanActiveCategory
+const productsUpdateProduct = (product) => ({  
+    type: types.productsUpdateProduct,
+    payload: product
 });
 
-const categoriesLogout = () => ({
-    type: types.categoriesClearData
+
+export const productsCleanActiveProduct = () => ({
+    type: types.productsCleanActiveProduct
+});
+
+const productsLogout = () => ({
+    type: types.productsClearData
 });
 
 

@@ -36,6 +36,23 @@ export const types = {
     categoriesCleanActiveCategory: '[categories] Clean active category',
     
 
+    productsSetActiveProduct: '[products] Set active Product',
+    productsClearData: '[products] Clear Data',
+    productsSetData: '[products] Set Data',
+    productsDeleteProduct: '[products] Delete Product',
+    productsAddProduct: '[products] Add Product',
+    productsUpdateProduct: '[products] Update Product',
+    productsCleanActiveProduct: '[products] Clean Dctive Product',
+
+
+    stockSetActiveStock: '[stock] Set active Stock',
+    stockClearData: '[stock] Clear Data',
+    stockSetData: '[stock] Set Data',
+    stockDeleteStock: '[stock] Delete Stock',
+    stockAddStock: '[stock] Add Stock',
+    stockUpdateStock: '[stock] Update Stock',
+    stockCleanActiveStock: '[stock] Clean Dctive Stock',
+
     
 
 

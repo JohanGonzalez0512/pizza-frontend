@@ -34,14 +34,7 @@ export const ListPayScreen = () => {
                         <div className='list__itemList__textDescription'>
                             <h2>{item.name}</h2>
                             <div className='list__itemList__textDescription__bottom-text'>
-                                {
-                                    // item.idIngs.length > 1 ?
-                                    //     <Marquee gradient={false} >
-                                    //         <p>{item.ingredients}</p>
-                                    //     </Marquee>
-                                    //     :
-                                    //     <p>{item.ingredients}</p>
-                                }
+                              
                                 <p className='list__itemList__textDescription__bottom-text-mainIngredient'>
                                     {item.element.name}
                                 </p>

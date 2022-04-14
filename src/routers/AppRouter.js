@@ -23,7 +23,7 @@ export const AppRouter = () => {
         <BrowserRouter>
             <Routes>
 
-                <Route path="/login*" element={
+                <Route path="/login/*" element={
                     <PublicRoute>
                         <DashboardRoutesLogin />
                     </PublicRoute>

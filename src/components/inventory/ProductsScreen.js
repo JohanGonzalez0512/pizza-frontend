@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { categoriesStartGetCategories } from '../../actions/category';
+import { productsSetActiveProduct, productsStartDelete, productsStartGetProducts } from '../../actions/products';
+import { uiSetIsModalOpen } from '../../actions/ui';
 import { buildData } from '../../helpers/buildDataTables';
 import { isACoincidenceSearch } from '../../helpers/isACoincidence';
 import { SearchBar } from '../ui/filters/SearchBar';
-import { Select } from '../ui/filters/Select';
+import { Modal } from '../ui/Modal';
 import { Table } from '../ui/Table';
+import { AddProducts } from './AddProducts';
 
-
-const options = [
-    {
-
-        id: 1,
-        category: "Combos",
-    },
-    {
-        id: 0,
-        category: "Pizzas",
-    },
-    {
-        id: 10,
-        category: "fsdfds",
-    },
-    {
-        id: 3,
-        category: "sdfdsfdsf",
-    },
-
-]
 
 
 
@@ -44,18 +28,6 @@ const headers = [
         textAlign: "center",
     },
     {
-        title: "VIable hasta",
-        textAlign: "center",
-    },
-    {
-        title: "Cantidad",
-        textAlign: "center",
-    },
-    {
-        title: "Precio",
-        textAlign: "center",
-    },
-    {
         title: "‎",
         textAlign: "center",
     },
@@ -68,92 +40,59 @@ const headers = [
 
 
 
-const data = [
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    {
-        name: 'Pizza',
-        code: '1234',
-        category: 'combos',
-        date_expiraiton: '10/21/2021',
-        quantity: '20',
-        price: '$500'
-    },
-    
 
 
-]
+
+
+
 
 export const ProductsScreen = () => {
+
+
+    const { ui, products: { data } } = useSelector(state => state);
+    const { isModalOpen } = ui;
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(productsStartGetProducts());
+        dispatch(categoriesStartGetCategories());
+    }, []);
+
+
+
+
     const [valueSearchFilter, setValueSearchFilter] = useState({
         searchWord: "",
     });
     const [dataShow, setDataShow] = useState([])
 
 
-    const { searchWord } = valueSearchFilter
+    const handleClick = (id) => {
+        dispatch(productsSetActiveProduct(id))
+        handleClickOpenModal();
+    }
+    const handleClick2 = (id) => {
+        dispatch(productsStartDelete(id));
+    }
+    const handleClickOpenModal = () => {
+        dispatch(uiSetIsModalOpen());
+    }
 
     const generateData = () => {
         const dataToShow = [];
         const { searchWord } = valueSearchFilter;
-        data.forEach(({ name, code, category, date_expiraiton, quantity, price }) => {
+        data.forEach(({ id, name, code, category, }) => {
             const coincidence = isACoincidenceSearch(
-                [name, code, category, quantity, price],
+                [name, code, category.name],
                 searchWord
             );
-            const dataBuilded = buildData(name, code, category, date_expiraiton, quantity, price,coincidence)
+            const dataBuilded = buildData(id, name, code, category.name, handleClick, handleClick2, { id, name, code, category }, coincidence)
 
             if (searchWord === "") {
                 dataToShow.push(dataBuilded);
-              } else if (coincidence.includes(true)) {
+            } else if (coincidence.includes(true)) {
                 dataToShow.push(dataBuilded);
-              }
+            }
 
         });
 
@@ -162,42 +101,50 @@ export const ProductsScreen = () => {
 
     useEffect(() => {
         generateData()
-    }, [data,valueSearchFilter]);
+    }, [data, valueSearchFilter]);
+
+
+
 
 
 
 
     return (
         <div className='container'>
-            <div className='card'>
+            <div className={`card ${isModalOpen && 'modal-active'}`} >
                 <h1 className="card__title">
                     Catalogo de productos
                 </h1>
 
 
                 <div className='filters__container'>
-                    <Select
-                        options={options}
-                        setValueSearchFilter={setValueSearchFilter}
-                        defaultValue={'Buscar por categoria'} />
                     <SearchBar valueSearchFilter={valueSearchFilter}
                         setValueSearchFilter={setValueSearchFilter}
                         placeholder={'Buscar por nombre'} />
                 </div>
 
                 <Table
-                        headers={headers}
-                        data={dataShow}
-                        sizesColumns={[14, 14, 14, 14, 14, 14, 14]}
+                    headers={headers}
+                    data={dataShow}
+                    sizesColumns={[25, 25, 25, 25]}
+                />
+
+
+                {
+                    isModalOpen &&
+                    <Modal
+                        Component={AddProducts}
                     />
-                    <div className='btn__container'>
-                        <Link to={'/inventario/agregar-catalogo'} className='btn-add'>
-                            Agregar producto
-                        </Link>
-                    </div>
+                }
+                <div className='btn__container'>
+                    <button onClick={() => handleClickOpenModal()} className='btn-add'>
+                        Agregar Producto
+                    </button>
+                </div>
             </div>
         </div>
     )
 
 
 };
+

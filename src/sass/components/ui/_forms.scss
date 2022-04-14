@@ -3,6 +3,7 @@
     flex-direction: column;
     margin-top: 2rem;
     height: 100%;
+    overflow-y: auto;
     &__container {
         display: flex;
         align-items: center;
@@ -20,21 +21,51 @@
         border-radius: 2rem;
         display: flex;
         flex: 0 0 40%;
+        
         flex-direction: column;
         @include respond(phone) {
             flex: 1;
         }
+
+        &__input {
+            display: flex;
+            flex-direction: column;
+            flex: 0 1 100%;
+            margin-bottom: 2rem;
+            @include respond(phone) {
+                margin-bottom: 0;
+            }
+            &__label {
+                display: flex;
+                align-items: center;
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+                & input[type="checkbox"] {
+                    margin-right: 1rem;
+                    padding: 1rem;
+                    height: 2rem;
+                    width: 2rem;
+                    &:checked {
+                        color: $color-primary;
+                    }
+                }
+            }
+        }
         & label {
-            margin-left: 1rem;
+            margin-left: 2rem;
             color: rgb(0, 0, 0);
         }
 
         & input {
-            border-radius: 1.5rem;
-            border: 1px solid #000000;
+            box-shadow: 0px 4px 15px #00000021;
+            border: 1px solid #fefefe;
+            width: 100%;
+            margin-left: 1.3rem;
+            font-size: 1.5rem;
+            border-radius: 2rem;
         }
         & span {
-            margin-left: 1rem;
+            margin-left: 2rem;
             color: red;
             font-weight: 600;
         }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { SearchBar } from '../ui/filters/SearchBar';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import { useDispatch } from 'react-redux';
+import { reportStartGenerateReport } from '../../actions/payments';
 
 
 
@@ -13,6 +15,8 @@ const initial = {
 
 export const PaymentsScreen = () => {
     const [initialState, setInitialState] = useState(initial)
+    const dispatch = useDispatch();
+
     const handleDayClick = (day) => {
         const range = DateUtils.addDayToRange(day, initialState);
         setInitialState(range);
@@ -23,7 +27,10 @@ export const PaymentsScreen = () => {
     }
     const { from, to } = initialState;
     const modifiers = { start: from, end: to };
-
+    
+    const handleSubmit = () => {
+        dispatch(reportStartGenerateReport(from, to))
+    }
 
 
 
@@ -65,7 +72,7 @@ export const PaymentsScreen = () => {
                             <button className="btn-cancel" onClick={handleResetClick}>
                                 Reiniciar
                             </button>
-                            <button className="btn-add" onClick={handleResetClick}>
+                            <button className="btn-add" onClick={handleSubmit}>
                                 Generar Reporte
                             </button>
                         </>

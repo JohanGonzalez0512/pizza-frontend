@@ -80,6 +80,33 @@ const initialState = {
                             }
                         ]
                     },
+                    {
+                        header: 'ingredientes 3',
+                        type: 'checkbox',
+                        name: 'extras2',
+                        value: [],
+                        adjuncts: [
+                            {
+                                value: 'id_1',
+                                label: 'Peperoni3'
+
+                            },
+                            {
+                                value: 'id_2',
+                                label: 'Jamon3'
+                            },
+                            {
+                                value: 'id_3',
+                                label: 'Carne molida3'
+
+                            },
+                        ],
+                        validations: [
+                            {
+                                type: 'requiredCheck'
+                            }
+                        ]
+                    },
 
 
 

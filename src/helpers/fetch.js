@@ -26,7 +26,6 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
     if (method === 'GET') {
         return fetch(url, {
             method,
-          
             headers: {
                 'access-token': token
             }

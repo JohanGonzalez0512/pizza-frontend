@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 /**
     * @description ButtonTable component
     * @param {int} type - type of button
@@ -17,7 +16,10 @@ export const ButtonTable = ({
     type,
     onClick,
     title = '',
-    id
+    id,
+    id2,
+    onClick2,
+
 }) => {
 
     const buttonGenerator = () => {
@@ -34,7 +36,7 @@ export const ButtonTable = ({
                                 <use href="/sprite.svg#icon-edit"></use>
                             </svg>
                         </button>
-                        <button className='btnTable__container delete' onClick={() => onClick(id)} >
+                        <button className='btnTable__container delete' onClick={() => onClick2(id)} >
                             <svg className="btnTable__container__icon red">
                                 <use href="/sprite.svg#icon-trash"></use>
                             </svg>
@@ -42,6 +44,18 @@ export const ButtonTable = ({
                     </div>
 
                 )
+
+                case 2:
+                    return (
+                        <div className='btnTable__container__editDelete'>    
+                            <button className='btnTable__container delete' onClick={() => onClick(id)} >
+                                <svg className="btnTable__container__icon red">
+                                    <use href="/sprite.svg#icon-trash"></use>
+                                </svg>
+                            </button>
+                        </div>
+    
+                    )
 
 
             default:

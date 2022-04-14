@@ -1,100 +1,98 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { SelectList } from '../ui/SelectList';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiSetIsModalOpen } from '../../actions/ui';
+import { productsCleanActiveProduct, productsStartCreateProduct, productsStartUpdateProduct } from '../../actions/products';
 
-const categories = [
-    {
-        id:1,
-        name:"Categoria 1"
-    },
-    {
-        id:2,
-        name:"Categoria 2"
-    },
-    {
-        id:3,
-        name:"Categoria 3"
-    },
-    {
-        id:4,
-        name:"Categoria 4"
-    },
-    {
-        id:5,
-        name:"Categoria 5"
-    },
-    {
-        id:6,
-        name:"Categoria 5"
-    },
-    {
-        id:7,
-        name:"Categoria 5"
-    },
-    {
-        id:8,
-        name:"Categoria 5"
-    },
-    {
-        id:9,
-        name:"Categoria 5"
-    },
-]
+
 
 export const AddProducts = () => {
 
-    const [category, setCategory] = useState({})
+    const { categories: { data: categories }, products: { activeProduct } } = useSelector(state => state);
+    const [category, setCategory] = useState(activeProduct ? activeProduct.category : {})
+
+
+
+    const dispatch = useDispatch();
+    const handleClickCancelModal = () => {
+        dispatch(uiSetIsModalOpen());
+        dispatch(productsCleanActiveProduct())
+    }
+
+
 
     const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
         initialValues: {
-            name: '',
-            
+            name: activeProduct ? activeProduct.name : '',
+            code: activeProduct ? activeProduct.code : '',
+
         },
         onSubmit: (values) => {
+            if (activeProduct) {
+                dispatch(productsStartUpdateProduct(activeProduct.id, values, category.id));
+                dispatch(productsCleanActiveProduct())
+            }
+            else {
+                dispatch(productsStartCreateProduct(values, category.id));
+            }
+
             resetForm()
+            handleClickCancelModal()
         },
         validationSchema: Yup.object({
             name: Yup.string()
-                .required('Requerido'),   
+                .required('Requerido'),
+            code: Yup.string()
+                .required('Requerido'),
         })
     });
 
 
     return (
-        <div className='container'>
-            <div className='card'>
-                <h1 className="card__title">
-                    Añadir al catalogo de productos
-                </h1>
-           
 
-            <form onSubmit={handleSubmit} className="form" >
-                <div className='form__container'>
+        <div className='add_category '>
+            <h1 className="card__title">
+                Añadir al catalogo de productos
+            </h1>
+
+
+            <form onSubmit={handleSubmit} className="form " >
+                <div className='form__container scroll'>
 
                     <div className="form__inputs">
-                        
-                        <label htmlFor="name">Nombre del producto</label>
-                        <input type="text" {...getFieldProps('name')} />
-                        {touched.name && errors.name && <span>{errors.name}</span>}
 
+                        <div className='form__inputs__input'>
 
-                        
+                            <label htmlFor="name">Nombre del producto</label>
+                            <input type="text" {...getFieldProps('name')} />
+                            {touched.name && errors.name && <span>{errors.name}</span>}
+                        </div>
+
+                        <div className='form__inputs__input'>
+                            <label htmlFor="code">Codigo del producto</label>
+                            <input type="text" {...getFieldProps('code')} />
+                            {touched.code && errors.code && <span>{errors.code}</span>}
+                        </div>
+
                     </div>
-                    
-                    <SelectList item={category} items={categories} setItem={setCategory}/>
+
+                    <SelectList item={category} items={categories} setItem={setCategory} />
                 </div>
-                    <div className='btn__container'>
-                    <Link to={"/inventario"}  className="btn-cancel">
+                <div className='btn__container'>
+                    <button onClick={handleClickCancelModal} className="btn-cancel">
                         Cancelar
-                    </Link>
-                    <button type="submit" className="btn-add">
-                        Agregar producto
                     </button>
-                    </div>
-                </form>
+                    {Object.values(category).length > 0 &&
+
+                        <button type="submit" className="btn-add">
+                            Agregar producto
+                        </button>
+                    }
                 </div>
+            </form>
         </div>
+
     )
 }

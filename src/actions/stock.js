@@ -3,15 +3,15 @@ import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
-export const categoriesStartGetCategories = () => {
+export const stockStartGetStock = () => {
     return async (dispatch) => {
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories`)
+            const res = await fetchConToken(`stocktaking`)
             const body = await res.json()
             if (body.ok) {
-                dispatch(categoriesSetData(body.data.product_categories))
+                dispatch(stockSetData(body.data.stock.items))
             } else {
                 console.log(body)
                 Swal.fire({
@@ -29,13 +29,14 @@ export const categoriesStartGetCategories = () => {
     }
 }
 
-export const categoriesStartCreateCategory = (data) => {
+export const stockStartCreateStock = (data, id) => {
     return async (dispatch) => {
-       
+
+        console.log(data)
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories`, data , 'POST')
+            const res = await fetchConToken(`stocktaking/${id}`, data , 'POST')
             const body = await res.json()
             if (body.ok) {
                 Swal.fire({
@@ -43,7 +44,7 @@ export const categoriesStartCreateCategory = (data) => {
                     text: 'El registro se ha guardado correctamente',
                     icon: 'success',
                 })
-                dispatch(categoriesAddCategory(body.data.category));
+                dispatch(stockAddStock(body.data.stock.item));
 
             } else {
                 console.log(body)
@@ -63,53 +64,23 @@ export const categoriesStartCreateCategory = (data) => {
 }
 
 
-export const categoriesStartUpdateCategory = (id, data) => {
+
+export const stockStartDelete = (id) => {
     return async (dispatch) => {
         try {
             dispatch(uiStartLoading())
 
-            const res = await fetchConToken(`product_categories/${id}`, data, 'PUT')
+            const res = await fetchConToken(`stocktaking/${id}`, {}, 'DELETE')
             const body = await res.json()
             if (body.ok) {
-                Swal.fire({
-                    title: '¡Actualizado!',
-                    text: 'El registro se ha actualizado correctamente',
-                    icon: 'success',
-                })
-                console.log(body)
-                dispatch(categoriesUpdateCategory(body.data.category));
-            } else {
-                console.log(body)
-                Swal.fire({
-                    title: '¡Oops!',
-                    text: body.msg,
-                    icon: 'question',
-                })
-            }
-        } catch (error) {
-            console.log(error)
-            Swal.fire('Error', 'Hablar con el administrador', 'error')
-        }
-        dispatch(uiFinishLoading())
 
-    }
-}
-
-export const categoriesStartDelete = (id) => {
-    return async (dispatch) => {
-        try {
-            dispatch(uiStartLoading())
-
-            const res = await fetchConToken(`product_categories/${id}`, {}, 'DELETE')
-            const body = await res.json()
-            if (body.ok) {
                 Swal.fire({
                     title: '¡Eliminado!',
                     text: 'El registro se ha eliminado correctamente',
                     icon: 'success',
                 })
                 console.log(body)
-                dispatch(categoriesDeleteCategory(body.data.category));
+                dispatch(stockDeleteStock(body.data.stock.item));
             } else {
                 console.log(body)
                 Swal.fire({
@@ -126,37 +97,37 @@ export const categoriesStartDelete = (id) => {
     }
 }
 
-const categoriesSetData = (data) => ({
-    type: types.categoriesSetData,
+const stockSetData = (data) => ({
+    type: types.stockSetData,
     payload: data
 });
 
-export const categoriesSetActiveCategory = (category) => ({
-    type: types.categoriesSetActiveCategory,
-    payload: category
+export const stockSetActiveStock = (stock) => ({
+    type: types.stockSetActiveStock,
+    payload: stock
 });
 
-const categoriesAddCategory = (category) => ({
-    type: types.categoriesAddCategory,
-    payload: category
+const stockAddStock = (stock) => ({
+    type: types.stockAddStock,
+    payload: stock
 });
 
-const categoriesDeleteCategory = (category) => ({
-    type: types.categoriesDeleteCategory,
-    payload: category
+const stockDeleteStock = (stock) => ({
+    type: types.stockDeleteStock,
+    payload: stock
 });
-const categoriesUpdateCategory = (category) => ({  
-    type: types.categoriesUpdateCategory,
-    payload: category
-});
-
-
-export const categoriesCleanActiveCategory = () => ({
-    type: types.categoriesCleanActiveCategory
+const stockUpdateStock = (stock) => ({  
+    type: types.stockUpdateStock,
+    payload: stock
 });
 
-const categoriesLogout = () => ({
-    type: types.categoriesClearData
+
+export const stockCleanActiveStock = () => ({
+    type: types.stockCleanActiveStock
+});
+
+const stockLogout = () => ({
+    type: types.stockClearData
 });
 
 

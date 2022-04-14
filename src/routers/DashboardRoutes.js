@@ -3,6 +3,7 @@ import { Home } from '../components/Home';
 import { AddProducts } from '../components/inventory/AddProducts';
 import { CategoriesScreen } from '../components/inventory/CategoriesScreen';
 import { ProductsScreen } from '../components/inventory/ProductsScreen';
+import { StockScreen } from '../components/inventory/StockScreen';
 import { MakeOrder } from '../components/orders/MakeOrder';
 import { OrdersHistory } from '../components/orders/OrdersHistory';
 import { ExpensesScreen } from '../components/payments/ExpensesScreen';
@@ -21,9 +22,8 @@ export const DashboardRoutes = () => {
               <Navbar/>
                 <Routes>
                     
-                    <Route path="inventario" element={<ProductsScreen/>} />
-                    <Route path="inventario/agregar-catalogo" element={<AddProducts/>} />
-                    {/* <Route path="inventario/añadir-catalogo" element={<ProductsScreen/>} /> */}
+                    <Route path="productos" element={<ProductsScreen/>} />
+                    <Route path="inventario" element={<StockScreen/>} />
                     <Route path="pedidos" element={<MakeOrder/>} />
                     <Route path="pedidos/historial" element={<OrdersHistory/>} />
                     <Route path="contabilidad/gastos" element={<ExpensesScreen/>} />
