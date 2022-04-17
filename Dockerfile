@@ -2,6 +2,8 @@ FROM node:latest as node
 WORKDIR /app
 COPY ./ ./
 RUN npm install
+ARG URI
+ENV REACT_APP_API_URL=$URI
 RUN npm run build
 
 
