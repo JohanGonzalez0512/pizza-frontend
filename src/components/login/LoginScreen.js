@@ -48,7 +48,7 @@ export const LoginScreen = () => {
 
 
                         <label htmlFor="password">Contraseña</label>
-                        <input type="text" {...getFieldProps('password')} />
+                        <input type="password" {...getFieldProps('password')} />
                         {touched.password && errors.password && <span>{errors.password}</span>}
 
 

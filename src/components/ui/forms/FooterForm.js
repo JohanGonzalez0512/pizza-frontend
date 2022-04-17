@@ -16,8 +16,11 @@ export const FooterForm = () => {
             <h3>
                 {'Seleccione los ingredientes de su pizza y/o aditamentos'}
             </h3>
-            <button className='btn-add' onClick={handleClickCancel}>Cancelar</button>
+            <div className='buttons'>
+
+            <button className='btn-cancel' onClick={handleClickCancel}>Cancelar</button>
             <button className='btn-add' type='submit'>Aceptar</button>
+            </div>
         </div>
     )
 }

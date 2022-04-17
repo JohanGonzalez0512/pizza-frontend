@@ -24,7 +24,7 @@ export const Navbar = () => {
             <div
                 onClick={e => setActive(!active)}
                 className={`phoneNav ${active && 'active'}`}>
-
+                <i className="fa-solid fa-pizza-slice"></i>
             </div>
             <nav className={`navbar ${active && 'active'}`}>
                 <Link to="/" className="navbar__logo">
