@@ -12,12 +12,12 @@ export const ListIngredients = ({ activeItem = {} }) => {
     const dispatch = useDispatch();
 
 
-
+    console.log(activeItem)
 
     const [initialValues, validationSchema] = validationsInputs(activeItem.elements);
 
 
-    //TODO: TRAER TODA LA DATA DE LOS INGREDIENTES
+   
 
 
     const handleClickAddCart = (values) => {
@@ -37,7 +37,7 @@ export const ListIngredients = ({ activeItem = {} }) => {
                 {({ values, setFieldValue }) => (
                     <Form>
                         <div className='listIngredients__body'>
-                            {console.log(values)}
+                          
                             {
                                 Object.values(activeItem.elements).map((item) => (
                                     <div key={item.header} className='listIngredients__body__itemList' >

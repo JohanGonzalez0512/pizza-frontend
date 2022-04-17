@@ -15,8 +15,16 @@ export const types = {
 
 
     orderSetActiveItem: '[order] Set active item',
+    orderSetDataForms: '[order] Set Data Forms',
+    orderAddItemOrder: '[order] Add item order',
+    orderClearOrder: '[order] Clear order',
+    orderSetData: '[order] Set Data',
+    orderCancelOrder: '[order] Cancel Order',
+    orderCompleteOrder: '[order] Complete Order',
     orderSetIsActive: '[order] Set is active',
     orderAddToCart: '[order] Add to cart',
+    orderGetTotal: '[order] Get total',
+    orderAddToCartPreBuild: '[order] Add to cart Pre Build',
     orderDeleteItemCart:'[order] delete item cart',
     orderAddQuantity:'[order] add quantity',
     orderMinusQuantity:'[order] delete quantity',
@@ -34,6 +42,16 @@ export const types = {
     categoriesAddCategory: '[categories] Add category',
     categoriesUpdateCategory: '[categories] Update category',
     categoriesCleanActiveCategory: '[categories] Clean active category',
+
+
+    categoriesMenuSetActiveCategoryMenu: '[categoriesMenu] Set active Category Menu',
+    categoriesMenuClearData: '[categoriesMenu] Clear data',
+    categoriesMenuSetData: '[categoriesMenu] Set data',
+    categoriesMenuDeleteCategoryMenu: '[categoriesMenu] Delete Category Menu',
+    categoriesMenuAddCategoryMenu: '[categoriesMenu] Add categoryMenu',
+    categoriesMenuUpdateCategoryMenu: '[categoriesMenu] Update Category Menu',
+    categoriesMenuCleanActiveCategoryMenu: '[categoriesMenu] Clean active Category Menu',
+
     
 
     productsSetActiveProduct: '[products] Set active Product',
@@ -42,7 +60,7 @@ export const types = {
     productsDeleteProduct: '[products] Delete Product',
     productsAddProduct: '[products] Add Product',
     productsUpdateProduct: '[products] Update Product',
-    productsCleanActiveProduct: '[products] Clean Dctive Product',
+    productsCleanActiveProduct: '[products] Clean active Product',
 
 
     stockSetActiveStock: '[stock] Set active Stock',
@@ -51,7 +69,16 @@ export const types = {
     stockDeleteStock: '[stock] Delete Stock',
     stockAddStock: '[stock] Add Stock',
     stockUpdateStock: '[stock] Update Stock',
-    stockCleanActiveStock: '[stock] Clean Dctive Stock',
+    stockCleanActiveStock: '[stock] Clean active Stock',
+    
+
+    menuSetActiveItemMenu: '[menu] Set Active Item Menu',
+    menuClearData: '[menu] Clear Data',
+    menuSetData: '[menu] Set Data',
+    menuDeleteItemMenu: '[menu] Delete Item Menu',
+    menuAddItemMenu: '[menu] Add Item Menu',
+    menuUpdateItemMenu: '[menu] Update Item Menu',
+    menuCleanActiveItemMenu: '[menu] Clean active Item Menu',
 
     
 

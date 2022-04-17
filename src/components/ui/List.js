@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { orderSetActive } from '../../actions/order'
+import { evauluateOrder, orderSetActive } from '../../actions/order'
 export const List = ({ data, filter }) => {
     const dispatch = useDispatch()
     const { searchWord } = filter;
-    const handleClick = (item) => dispatch(orderSetActive(item))
+    const handleClick = (item) => dispatch(evauluateOrder(item))
 
     return (
         <div className='list'>

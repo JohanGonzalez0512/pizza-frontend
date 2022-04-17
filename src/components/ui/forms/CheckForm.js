@@ -6,7 +6,6 @@ export const CheckForm = ({ item = [], setFieldValue, values }) => {
     const handleClickCheck = ({ target }) => {
 
         const { name, value } = target
-        console.log(values)
         const data = values[item.name]
 
         let newAdded = true;
@@ -30,15 +29,15 @@ export const CheckForm = ({ item = [], setFieldValue, values }) => {
     return (
         <>
             {
-                item.adjuncts.map(({ value, label }, index) => (
+                item.adjunts.map(({ id, label }, index) => (
                     <label key={index} className='listIngredients__body__itemList__item'  >
                         {label}
-                        <input type='checkbox' name={label} value={value} onClick={handleClickCheck} />
+                        <input type='checkbox' name={label} value={id} onClick={handleClickCheck} />
                         {/* <Field key={value} type={item.type} name={item.name} value={value} /> */}
                     </label>
                 ))
             }
-            <ErrorMessage name={item.name} />
+            <ErrorMessage name={item.name} component="span"/>
         </>
     )
 }

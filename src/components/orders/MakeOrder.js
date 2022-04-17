@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { orderStartSetDataForms } from '../../actions/order';
 import { Cart } from '../ui/Cart';
 import { ListIngredients } from '../ui/makeOrders/ListIngredients';
 import { ListMenu } from '../ui/makeOrders/ListMenu';
@@ -10,10 +11,17 @@ export const MakeOrder = () => {
 
     const { orders, ui } = useSelector(state => state);
 
+    
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(orderStartSetDataForms());
+    }, [])
     const { orderActive, isActiveItem, options, itemListData, cart } = orders;
 
+    console.log(itemListData)
+
     const { isModalOpen } = ui;
-    
+
     return (
         <div className='container makeOrders'>
             <div className={`card ${isModalOpen && 'modal-active'} `}>
@@ -28,7 +36,7 @@ export const MakeOrder = () => {
                     />
                 }
 
-                {!isActiveItem &&
+                {!isActiveItem && itemListData.length > 0 &&
                     <>
                         <ListMenu
                             options={options}

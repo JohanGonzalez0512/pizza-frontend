@@ -75,6 +75,50 @@
             background: transparent;
             border: none;
         }
+        &.check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: green;
+            
+            background: transparent;
+            border: none;
+            i{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+            }
+        }
+
+        &.cancel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: red;
+            
+            background: transparent;
+            border: none;
+            i{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+            }
+        }
+
+        &.blocked {
+            cursor: not-allowed;
+            pointer-events: none;
+            height: 2rem;
+            width: 2rem; 
+            color: black;
+            background: transparent;
+            border: none;
+        }
+
 
         &__icon {
            

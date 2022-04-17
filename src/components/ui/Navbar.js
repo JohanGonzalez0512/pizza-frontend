@@ -67,9 +67,8 @@ export const Navbar = () => {
                                         Administrar Menu
                                     </p>
                                     <div className={`submenu  ${subMenusActive.subMenu4 ? 'active' : ''}`}>
-                                        <Link to="/contabilidad/reporte" >Categorias</Link>
-                                        <Link to="/contabilidad/gastos" >Combos</Link>
-                                        <Link to="/contabilidad/gastos" >Menu</Link>
+                                        <Link to="/pedidos/categorias" >Categorias</Link>
+                                        <Link to="/pedidos/menu" >Menu</Link>
                                     </div>
                                 </div>
 

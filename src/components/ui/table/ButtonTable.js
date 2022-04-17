@@ -19,6 +19,7 @@ export const ButtonTable = ({
     id,
     id2,
     onClick2,
+    status = 'completed',
 
 }) => {
 
@@ -36,7 +37,7 @@ export const ButtonTable = ({
                                 <use href="/sprite.svg#icon-edit"></use>
                             </svg>
                         </button>
-                        <button className='btnTable__container delete' onClick={() => onClick2(id)} >
+                        <button className='btnTable__container delete' onClick={() => onClick2(id2)} >
                             <svg className="btnTable__container__icon red">
                                 <use href="/sprite.svg#icon-trash"></use>
                             </svg>
@@ -45,17 +46,41 @@ export const ButtonTable = ({
 
                 )
 
-                case 2:
-                    return (
-                        <div className='btnTable__container__editDelete'>    
-                            <button className='btnTable__container delete' onClick={() => onClick(id)} >
-                                <svg className="btnTable__container__icon red">
-                                    <use href="/sprite.svg#icon-trash"></use>
-                                </svg>
-                            </button>
-                        </div>
-    
-                    )
+            case 2:
+                return (
+                    <div className='btnTable__container__editDelete'>
+                        <button className='btnTable__container delete' onClick={() => onClick(id)} >
+                            <svg className="btnTable__container__icon red">
+                                <use href="/sprite.svg#icon-trash"></use>
+                            </svg>
+                        </button>
+                    </div>
+
+                )
+
+            case 3:
+                return (
+                    <div className='btnTable__container__editDelete'>
+                        <button className={`btnTable__container check ${status !== 'Pendiente' ? 'blocked' : ''}  `} onClick={() => onClick(id)} >
+                            <i className="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+
+                )
+
+            case 4:
+                return (
+                    <div className='btnTable__container__editDelete'>
+                        <button className={`btnTable__container cancel ${status !== 'Pendiente' ? 'blocked' : ''}`} onClick={() => onClick(id)} >
+                        <i className="fa-solid fa-ban"></i>
+                        </button>
+                        <button className={`btnTable__container cancel ${status !== 'Pendiente' ? 'blocked' : ''}`} onClick={() => onClick2(id)} >
+                        {/* <i className="fa-solid fa-trash-can-xmark"></i> */}
+                        <i className="fa-solid fa-rectangle-xmark"></i>
+                        </button>
+                    </div>
+
+                )
 
 
             default:

@@ -32,6 +32,7 @@
         }
 
         & .col {
+            
             display: flex;
             flex-direction: column;
             flex: 0 1 30%;
@@ -72,15 +73,18 @@
             flex-direction: column;
             width: 80%;
             margin-bottom: 2rem;
-
+            margin-left: 1.3rem;
             @include respond(phone) {
-                width: 100%;
+                width: 100%; 
             }
 
-            & label {
-                margin-left: 2rem;
+            & label { 
+                margin-left: 1rem;
                 margin-bottom: 0.5rem !important;
                 font-weight: 700;
+                display: flex;
+                justify-content: space-between;
+                gap: 2rem;
             }
 
             & textarea {
@@ -90,7 +94,7 @@
 
             & select {
                 box-shadow: 0px 4px 15px #00000021;
-                margin-left: 1.3rem;
+               
                 height: 3.5rem;
                 align-items: center;
                 padding: 0.5rem;
@@ -111,16 +115,26 @@
                 outline: none;
             }
 
+            & input[type="radio"] {
+                margin-right: 3rem;
+                padding: 1rem;
+                height: 2rem;
+                width: 2rem;
+
+                &:checked {
+                    color: $color-primary;
+                }
+            }
             & input {
                 box-shadow: 0px 4px 15px #00000021;
                 border: 1px solid #fefefe;
                 width: 100%;
-                margin-left: 1.3rem;
+               
                 font-size: 1.5rem;
                 border-radius: 2rem;
             }
             & span {
-                margin-left: 2rem;
+                margin-left: 1rem;
                 color: red;
                 font-weight: 600;
             }

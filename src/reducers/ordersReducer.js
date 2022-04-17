@@ -20,104 +20,12 @@ const initialState = {
             category: "sdfdsfdsf",
         },
     ],
-    itemListData:
-        [
-            {
-                id: 1,
-                name: 'pizza flamas',
-                price: '800',
-                elements: [
-                    {
-                        type: 'radio',
-                        name: 'element',
-                        value: '',
-                        header: 'ingredientes',
-                        adjuncts: [
-                            {
-                                value: 'id_1',
-                                label: 'papas'
-                            },
-                            {
-                                value: 'id_2',
-                                label: 'Jadasdsamon'
-                            },
-                            {
-                                value: 'id_3',
-                                label: 'Cadasdrne molida'
-
-                            },
-                        ],
-                        validations: [
-                            {
-                                type: 'requiredRadio'
-                            }
-                        ]
-                    },
-                    {
-                        header: 'ingredientes 2',
-                        type: 'checkbox',
-                        name: 'extras',
-                        value: [],
-                        adjuncts: [
-                            {
-                                value: 'id_1',
-                                label: 'Peperoni2'
-
-                            },
-                            {
-                                value: 'id_2',
-                                label: 'Jamon2'
-                            },
-                            {
-                                value: 'id_3',
-                                label: 'Carne molida3'
-
-                            },
-                        ],
-                        validations: [
-                            {
-                                type: 'requiredCheck'
-                            }
-                        ]
-                    },
-                    {
-                        header: 'ingredientes 3',
-                        type: 'checkbox',
-                        name: 'extras2',
-                        value: [],
-                        adjuncts: [
-                            {
-                                value: 'id_1',
-                                label: 'Peperoni3'
-
-                            },
-                            {
-                                value: 'id_2',
-                                label: 'Jamon3'
-                            },
-                            {
-                                value: 'id_3',
-                                label: 'Carne molida3'
-
-                            },
-                        ],
-                        validations: [
-                            {
-                                type: 'requiredCheck'
-                            }
-                        ]
-                    },
-
-
-
-                ],
-            },
-
-        ],
+    itemListData: [],
     orderActive: {},
     isActiveItem: false,
     cart: [],
-    FinalPrice: 0,
+    data: [],
+    total: 0,
 };
 
 
@@ -135,6 +43,27 @@ export const ordersReducer = (state = initialState, action) => {
                 isActiveItem: !state.isActiveItem,
             };
 
+        case types.orderClearOrder:   
+            return {
+                ...state,
+                orderActive: {},
+                cart: [],
+                isActiveItem: false,
+                total: 0,
+            };
+
+        case types.orderCancelOrder:
+            return {
+                ...state,
+                data: state.data.map(item => item.id === action.payload.id ? action.payload : item)
+            };
+
+        case types.orderCompleteOrder:
+            return {
+                ...state,
+                data: state.data.map(item => item.id === action.payload.id ? action.payload : item)
+            };
+
         case types.orderAddToCart:
             return {
                 ...state,
@@ -143,9 +72,44 @@ export const ordersReducer = (state = initialState, action) => {
                     {
                         id: state.orderActive.id,
                         name: state.orderActive.name,
+                        is_pre_built: state.orderActive.is_pre_built,
                         price: parseInt(state.orderActive.price) + action.payload.extras.length * 15,
                         startPrice: parseInt(state.orderActive.price) + action.payload.extras.length * 15,
                         quantity: 1,
+                        ...action.payload
+                    }
+                ],
+            };
+
+
+        case types.orderAddItemOrder:
+            return {
+                ...state,
+                data: [...state.data, action.payload]
+            }
+        case types.orderSetDataForms:
+            return {
+                ...state,
+                itemListData: action.payload,
+            }
+
+        case types.orderSetData:
+            return {
+                ...state,
+                data: action.payload,
+            }
+        case types.orderAddToCartPreBuild:
+            return {
+                ...state,
+                cart: [
+                    ...state.cart,
+                    {
+                        id: action.payload.id,
+                        name: action.payload.name,
+                        price: parseInt(action.payload.price),
+                        startPrice: parseInt(action.payload.price),
+                        quantity: 1,
+                        is_pre_built: state.orderActive.is_pre_built,
                         ...action.payload
                     }
                 ],
@@ -180,6 +144,14 @@ export const ordersReducer = (state = initialState, action) => {
                         price: item.startPrice * (item.quantity - (i === action.payload ? 1 : 0))
                     }
                 ))
+            };
+
+        case types.orderGetTotal:
+            return {
+                ...state,
+                total: state.cart.map((item) => parseFloat(item.price)).
+                    reduce((a, b) => a + b, 0)
+                // item.price + total
             };
 
         case types.orderDeleteItemCart:
