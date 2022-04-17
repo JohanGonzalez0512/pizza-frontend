@@ -1,0 +1,41 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - name: SSH Remote Commands
+    # You may pin to the exact commit or the version.
+    # uses: appleboy/ssh-action@1d1b21ca96111b1eb4c03c21c14ebb971d2200f6
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        # ssh host
+        host: ${{secrets.SSH_REMOTE_IP}}
+        # ssh username
+        username: ${{secrets.SSH_REMOTE_USERNAME}}
+        # ssh password
+        password: ${{secrets.SSH_REMOTE_PASSWORD}}
+        # run scripts
+        script: |
+          cd /home/gosling/Desktop/stagin-server/pizza-frontend
+          git pull origin main
+          docker-compose down
+          docker rmi webapp
+          docker-compose up -d --build
