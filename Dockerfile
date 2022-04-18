@@ -5,6 +5,7 @@ RUN npm install
 ARG URI
 ENV REACT_APP_API_URL=$URI
 RUN npm run build
+RUN cp ./.htaccess ./build/
 
 
 FROM httpd:latest as httpd
