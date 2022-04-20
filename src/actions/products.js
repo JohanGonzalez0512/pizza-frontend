@@ -167,7 +167,7 @@ export const productsCleanActiveProduct = () => ({
     type: types.productsCleanActiveProduct
 });
 
-const productsLogout = () => ({
+export const productsLogout = () => ({
     type: types.productsClearData
 });
 

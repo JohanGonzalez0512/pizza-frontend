@@ -1,6 +1,12 @@
 import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types";
 import Swal from 'sweetalert2'
+import { categoriesLogout } from "./category";
+import { categoriesMenuLogout } from "./categoryMenu";
+import { menuLogout } from "./menu";
+import { orderLogout } from "./order";
+import { productsLogout } from "./products";
+import { stockLogout } from "./stock";
 
 
 
@@ -124,6 +130,12 @@ export const startChecking = () => {
             }
             else {
                 dispatch(authCheckingFinish())
+                Swal.fire({
+                    title: '¡Oops!',
+                    text: "Parece que tu sesión ha expirado",
+                    icon: 'question',
+                })
+                dispatch(startLogout())
             }
         }
     }
@@ -143,7 +155,12 @@ const login = (user) => ({
 export const startLogout = () => {
     return (dispatch) => {
         localStorage.clear();
-
+        dispatch(categoriesLogout());
+        dispatch(categoriesMenuLogout());
+        dispatch(menuLogout());
+        dispatch(orderLogout());
+        dispatch(productsLogout());
+        dispatch(stockLogout());
         dispatch(logout());
     }
 }

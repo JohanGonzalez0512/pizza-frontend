@@ -41,7 +41,7 @@ export const stockReducer = (state = initialState, action) => {
             }
         case types.stockClearData:
             return {
-                initialState
+                ...initialState
             }
         default:
             return state;

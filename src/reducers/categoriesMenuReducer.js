@@ -41,7 +41,7 @@ export const categoriesMenuReducer = (state = initialState, action) => {
             }
         case types.categoriesMenuClearData:
             return {
-                initialState
+                ...initialState
             }
         default:
             return state;

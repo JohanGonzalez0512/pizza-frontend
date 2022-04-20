@@ -41,7 +41,7 @@ export const categoriesReducer = (state = initialState, action) => {
             }
         case types.categoriesClearData:
             return {
-                initialState
+                ...initialState
             }
         default:
             return state;

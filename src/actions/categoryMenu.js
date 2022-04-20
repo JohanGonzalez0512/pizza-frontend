@@ -157,7 +157,7 @@ export const categoriesMenuCleanActiveCategoryMenu = () => ({
     type: types.categoriesMenuCleanActiveCategoryMenu
 });
 
-const categoriesMenuLogout = () => ({
+export const categoriesMenuLogout = () => ({
     type: types.categoriesMenuClearData
 });
 

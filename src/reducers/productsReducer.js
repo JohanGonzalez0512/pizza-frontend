@@ -41,7 +41,7 @@ export const productsReducer = (state = initialState, action) => {
             }
         case types.productsClearData:
             return {
-                initialState
+                ...initialState
             }
         default:
             return state;

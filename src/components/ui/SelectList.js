@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const SelectList = ({ item, setItem, items }) => {
+export const SelectList = ({ item, setItem, items, title= 'Tipo de categoria' }) => {
 
 
     const [dispItems, setDispItems] = useState(items);
@@ -25,7 +25,7 @@ export const SelectList = ({ item, setItem, items }) => {
     return (
         <div className="select-list">
             <h3 className="select-list__title">
-                Tipo de categoria
+            {title}
             </h3>
             <div className="select-list__input">
                 <input type="text" value={searchItem} onChange={handleOnChange} />

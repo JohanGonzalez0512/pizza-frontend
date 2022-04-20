@@ -41,7 +41,7 @@ export const menuReducer = (state = initialState, action) => {
             }
         case types.menuClearData:
             return {
-                initialState
+               ... initialState
             }
         default:
             return state;

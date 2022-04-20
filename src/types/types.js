@@ -28,6 +28,7 @@ export const types = {
     orderDeleteItemCart:'[order] delete item cart',
     orderAddQuantity:'[order] add quantity',
     orderMinusQuantity:'[order] delete quantity',
+    orderLogout:'[order] logout',
 
 
     uiSetIsModalOpen: '[ui] Set is modal open',

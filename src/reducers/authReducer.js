@@ -59,9 +59,7 @@ export const authReducer = (state = initialState, action) => {
             }
         case types.authLogout:
             return {
-                ...state,
-                user: {},
-                logged: false,
+                ...initialState
             }
 
         default:

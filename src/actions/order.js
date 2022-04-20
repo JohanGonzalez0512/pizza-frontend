@@ -253,3 +253,7 @@ export const orderDeleteItemCart = (order) => ({
     payload: order
 });
 
+export const orderLogout = () => ({
+    type: types.orderLogout
+})
+

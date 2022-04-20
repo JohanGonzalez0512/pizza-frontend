@@ -155,7 +155,7 @@ export const categoriesCleanActiveCategory = () => ({
     type: types.categoriesCleanActiveCategory
 });
 
-const categoriesLogout = () => ({
+export const categoriesLogout = () => ({
     type: types.categoriesClearData
 });
 

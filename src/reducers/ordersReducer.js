@@ -1,25 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-    options: [
-        {
 
-            id: 1,
-            category: "Combos",
-        },
-        {
-            id: 0,
-            category: "Pizzas",
-        },
-        {
-            id: 10,
-            category: "fsdfds",
-        },
-        {
-            id: 3,
-            category: "sdfdsfdsf",
-        },
-    ],
     itemListData: [],
     orderActive: {},
     isActiveItem: false,
@@ -43,7 +25,7 @@ export const ordersReducer = (state = initialState, action) => {
                 isActiveItem: !state.isActiveItem,
             };
 
-        case types.orderClearOrder:   
+        case types.orderClearOrder:
             return {
                 ...state,
                 orderActive: {},
@@ -160,6 +142,12 @@ export const ordersReducer = (state = initialState, action) => {
                 cart: state.cart.filter((_, i) => i !== action.payload)
             };
 
+        case types.orderLogout:
+            return{
+
+                ...initialState
+            } 
+            
         default:
             return state;
     }

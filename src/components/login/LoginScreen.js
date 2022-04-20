@@ -12,8 +12,11 @@ export const LoginScreen = () => {
 
     const { handleSubmit, errors, touched, getFieldProps, resetForm } = useFormik({
         initialValues: {
-            email: 'test@gmail.com',
-            password: 'qwerty*123',
+            // email: 'test@gmail.com',
+            // password: 'qwerty*123',
+            email: '',
+            password: '',
+
         },
         onSubmit: (values) => {
             dispatch(startLogin(values.email, values.password))
@@ -50,11 +53,6 @@ export const LoginScreen = () => {
                         <label htmlFor="password">Contraseña</label>
                         <input type="password" {...getFieldProps('password')} />
                         {touched.password && errors.password && <span>{errors.password}</span>}
-
-
-                        <Link className='link' to='login-forget-password'
-                        >¿Restablecer contraseña?</Link >
-
                     </div>
                     <button type="submit" className="btn">
                         Iniciar sesión

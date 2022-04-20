@@ -90,7 +90,7 @@ export const AddStock = () => {
 
                     </div>
 
-                    <SelectList item={product} items={products} setItem={setProduct} />
+                    <SelectList title={"Productos"}item={product} items={products} setItem={setProduct} />
                 </div>
                 <div className='btn__container'>
                     <button onClick={handleClickCancelModal} className="btn-cancel">

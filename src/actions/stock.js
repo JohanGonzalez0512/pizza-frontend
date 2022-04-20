@@ -126,7 +126,7 @@ export const stockCleanActiveStock = () => ({
     type: types.stockCleanActiveStock
 });
 
-const stockLogout = () => ({
+export const stockLogout = () => ({
     type: types.stockClearData
 });
 

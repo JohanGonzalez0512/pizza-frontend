@@ -194,7 +194,7 @@ export const InfoPaymentScreen = () => {
                                 Reiniciar
                             </button>
                             <button type="submit" className="btn-add" >
-                                Generar Gasto
+                                Generar Orden
                             </button>
                         </div>
                     </Form>

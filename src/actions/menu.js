@@ -159,7 +159,7 @@ export const menuCleanActiveItemMenu = () => ({
     type: types.menuCleanActiveItemMenu
 });
 
-const MenuLogout = () => ({
+export const menuLogout = () => ({
     type: types.menuClearData
 });
 
