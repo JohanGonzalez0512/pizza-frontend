@@ -3,12 +3,12 @@ services:
   app:
     image: webapp
     ports:
-      - "81:80"
+      - "80:80"
     restart: always
 
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - URI=http://gosling-pro.duckdns.org:3001/api
+        - URI=164.92.114.213:3001/api
     container_name: web-application
