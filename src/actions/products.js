@@ -1,11 +1,14 @@
 import Swal from "sweetalert2"
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
+import { startChecking } from "./auth"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
 export const productsStartGetProducts = () => {
     return async (dispatch) => {
         try {
+
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`products`)
@@ -32,6 +35,7 @@ export const productsStartGetProducts = () => {
 export const productsStartCreateProduct = (data, category) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`products`, {
@@ -70,6 +74,7 @@ export const productsStartCreateProduct = (data, category) => {
 export const productsStartUpdateProduct = (id, data, category) => {
     return async (dispatch,) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`products/${id}`, {
@@ -109,6 +114,7 @@ export const productsStartUpdateProduct = (id, data, category) => {
 export const productsStartDelete = (id) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`products/${id}`, {}, 'DELETE')

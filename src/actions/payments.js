@@ -3,10 +3,12 @@ import { fetchConToken } from "../helpers/fetch"
 
 import download from 'downloadjs';
 import { uiFinishLoading, uiStartLoading } from "./ui"
+import { startChecking } from "./auth";
 
 export const ExpenseStartCreateExpense = (data) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`payments`, data, 'POST')
@@ -40,6 +42,7 @@ export const reportStartGenerateReport = (from,to) => {
     return async (dispatch) => {
        
         try {
+            dispatch(startChecking());
             const res = await fetchConToken(`sells_and_expenses_report?from=${from}&to${to}`)
             const blob = await res.blob();
             const statusDocument = download(blob, "test.pdf");

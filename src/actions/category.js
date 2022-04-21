@@ -1,11 +1,13 @@
 import Swal from "sweetalert2"
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
+import { startChecking } from "./auth"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
 export const categoriesStartGetCategories = () => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`product_categories`)
@@ -33,6 +35,7 @@ export const categoriesStartCreateCategory = (data) => {
     return async (dispatch) => {
        
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`product_categories`, data , 'POST')
@@ -66,6 +69,7 @@ export const categoriesStartCreateCategory = (data) => {
 export const categoriesStartUpdateCategory = (id, data) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`product_categories/${id}`, data, 'PUT')
@@ -98,6 +102,7 @@ export const categoriesStartUpdateCategory = (id, data) => {
 export const categoriesStartDelete = (id) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`product_categories/${id}`, {}, 'DELETE')

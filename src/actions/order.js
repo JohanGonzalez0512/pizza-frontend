@@ -2,6 +2,7 @@
 import Swal from "sweetalert2"
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
+import { startChecking } from "./auth"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
 
@@ -27,6 +28,7 @@ export const orderStartCancelOrder = (id, value = false) => {
     return async (dispatch) => {
 
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`orders/${id}/cancel`, {
@@ -63,6 +65,7 @@ export const orderStartCompleteOrder = (id) => {
     return async (dispatch) => {
 
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`orders/${id}/complete`,{}, 'PATCH')
@@ -97,6 +100,7 @@ export const orderStartCreateOrder = (order) => {
     return async (dispatch, getState) => {
 
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`orders`, order, 'POST')
@@ -132,6 +136,7 @@ export const orderStartSetDataForms = () => {
     return async (dispatch) => {
 
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`resmenu/forms`)
@@ -162,6 +167,7 @@ export const orderStartGetData = () => {
     return async (dispatch) => {
 
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`orders`)

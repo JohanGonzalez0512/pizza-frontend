@@ -1,11 +1,13 @@
 import Swal from "sweetalert2"
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
+import { startChecking } from "./auth"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
 export const stockStartGetStock = () => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`stocktaking`)
@@ -34,6 +36,7 @@ export const stockStartCreateStock = (data, id) => {
 
         console.log(data)
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`stocktaking/${id}`, data , 'POST')
@@ -68,6 +71,7 @@ export const stockStartCreateStock = (data, id) => {
 export const stockStartDelete = (id) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`stocktaking/${id}`, {}, 'DELETE')

@@ -142,8 +142,8 @@ export const startChecking = () => {
 }
 
 
-const authCheckingStart = () => ({ type: types.authCheckingStart })
-const authCheckingFinish = () => ({ type: types.authCheckingFinish })
+export const authCheckingStart = () => ({ type: types.authCheckingStart })
+export const authCheckingFinish = () => ({ type: types.authCheckingFinish })
 
 const login = (user) => ({
 

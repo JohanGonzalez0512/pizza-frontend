@@ -1,11 +1,13 @@
 import Swal from "sweetalert2"
 import { fetchConToken } from "../helpers/fetch"
 import { types } from "../types/types"
+import { startChecking } from "./auth"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
 export const categoriesMenuStartGetCategoriesMenu = () => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`resmenu_categories`)
@@ -33,6 +35,7 @@ export const categoriesMenuStartCreateCategoryMenu = (data) => {
     return async (dispatch) => {
        
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`resmenu_categories`, data , 'POST')
@@ -66,6 +69,7 @@ export const categoriesMenuStartCreateCategoryMenu = (data) => {
 export const categoriesMenuStartUpdateCategoryMenu = (id, data) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`resmenu_categories/${id}`, data, 'PUT')
@@ -98,6 +102,7 @@ export const categoriesMenuStartUpdateCategoryMenu = (id, data) => {
 export const categoriesMenuStartDelete = (id) => {
     return async (dispatch) => {
         try {
+            dispatch(startChecking());
             dispatch(uiStartLoading())
 
             const res = await fetchConToken(`resmenu_categories/${id}`, {}, 'DELETE')
