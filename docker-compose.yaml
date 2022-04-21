@@ -11,4 +11,6 @@ services:
       dockerfile: Dockerfile
       args:
         - URI=164.92.114.213:3001/api
+    volumes:
+      - /home/docker/volumes/nginx-front/nginx.conf:/etc/nginx/nginx.conf
     container_name: web-application

@@ -34,7 +34,7 @@ jobs:
         password: ${{secrets.SSH_REMOTE_PASSWORD}}
         # run scripts
         script: |
-          cd /home/gosling/Desktop/stagin-server/pizza-frontend
+          cd /home/services/pizza-frontend
           git pull origin main
           docker-compose down
           docker rmi webapp
