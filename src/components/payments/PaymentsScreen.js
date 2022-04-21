@@ -29,8 +29,8 @@ export const PaymentsScreen = () => {
     const modifiers = { start: from, end: to };
     
     const handleSubmit = () => {
-    dispatch(reportStartGenerateReport(from.toLocaleDateString().replaceAll("/", "-")),
-         to.toLocaleDateString().replaceAll("/", "-"))
+    dispatch(reportStartGenerateReport(from.toLocaleDateString().replaceAll("/", "-"),
+         to.toLocaleDateString().replaceAll("/", "-")))
     }
 
 
